@@ -15,13 +15,13 @@ import java.util.List;
 
 @Dao
 public interface CitizenDao {
-    @Query("SELECT * FROM user")
+    @Query("SELECT * FROM citizen")
     List<Citizen> getAll();
 
-    @Query("SELECT * FROM user WHERE uid IN (:citizenIds)")
-    List<Citizen> loadAllByIds(int[] citizenIds);
+    @Query("SELECT * FROM citizen WHERE username IN (:citizenUsernames)")
+    List<Citizen> loadAllByIds(int[] citizenUsernames);
 
-    @Query("SELECT * FROM user WHERE first_name LIKE :first AND "
+    @Query("SELECT * FROM citizen WHERE first_name LIKE :first AND "
             + "last_name LIKE :last LIMIT 1")
     Citizen findByName(String first, String last);
 

@@ -2,12 +2,9 @@ package com.kremes.kremeswt.utils;
 
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.kremes.kremeswt.database.KremesDatabase;
 import com.kremes.kremeswt.entity.Citizen;
-
-import java.util.List;
 
 /**
  * Created by Bota
@@ -32,13 +29,13 @@ public class DatabaseInitializer {
     }
 
     private static void populateWithTestData(KremesDatabase db) {
-        Citizen user = new Citizen();
-        user.setFirstName("Ajay");
-        user.setLastName("Saini");
-        addCitizen(db, user);
-
-        List<Citizen> userList = db.citizenDao().getAll();
-        Log.d(DatabaseInitializer.TAG, "Rows Count: " + userList.size());
+//        Citizen user = new Citizen();
+//        user.setFirstName("Ajay");
+//        user.setLastName("Saini");
+//        addCitizen(db, user);
+//
+//        List<Citizen> userList = db.citizenDao().getAll();
+//        Log.d(DatabaseInitializer.TAG, "Rows Count: " + userList.size());
     }
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
