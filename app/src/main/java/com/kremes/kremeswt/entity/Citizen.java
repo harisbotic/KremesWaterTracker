@@ -2,6 +2,7 @@ package com.kremes.kremeswt.entity;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 /**
@@ -32,6 +33,9 @@ public class Citizen {
 
     @ColumnInfo(name = "balance")
     private long balance;
+
+    @Ignore
+    public Report reportForLastMonth;
 
     public Citizen(String username, String firstName, String lastName, String phoneNumber) {
         this.username = username;

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context="com.kremes.kremeswt.activity.MenuStatisticsActivity">
+
+    <TextView
+        android:id="@+id/mainActivityTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Statistika"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:layout_alignParentTop="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+
+        <Button
+            android:id="@+id/btnListCitizenStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="18dp"
+            android:text="Ispis Stanja Korisnika"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btnListAddReport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ispis/Dodavanje Izvještaja"
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            android:padding="18dp"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btnListAddCitizen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ispis/Dodavanje Korisnika"
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            android:padding="18dp"
+            android:layout_marginBottom="8dp"/>
+    </LinearLayout>
+
+</RelativeLayout>
