@@ -10,7 +10,7 @@ import com.kremes.kremeswt.R;
 public class MenuStatisticsActivity extends AppCompatActivity implements Button.OnClickListener {
 
     Button btnListCitizenStatus;
-    Button btnListAddReport;
+    Button btnListReport;
     Button btnListAddCitizen;
 
     @Override
@@ -20,8 +20,8 @@ public class MenuStatisticsActivity extends AppCompatActivity implements Button.
 
         btnListCitizenStatus = findViewById(R.id.btnListCitizenStatus);
         btnListCitizenStatus.setOnClickListener(this);
-        btnListAddReport = findViewById(R.id.btnListAddReport);
-        btnListAddReport.setOnClickListener(this);
+        btnListReport = findViewById(R.id.btnListReport);
+        btnListReport.setOnClickListener(this);
         btnListAddCitizen = findViewById(R.id.btnListAddCitizen);
         btnListAddCitizen.setOnClickListener(this);
     }
@@ -33,7 +33,7 @@ public class MenuStatisticsActivity extends AppCompatActivity implements Button.
                 //startActivity(new Intent(MenuStatisticsActivity.this, MenuStatisticsActivity.class));
                 break;
 
-            case R.id.btnListAddReport:
+            case R.id.btnListReport:
                 //startActivity(new Intent(MainActivity.this, MenuStatisticsActivity.class));
                 break;
 

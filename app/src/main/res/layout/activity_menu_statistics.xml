@@ -34,10 +34,10 @@
             android:layout_marginBottom="8dp"/>
 
         <Button
-            android:id="@+id/btnListAddReport"
+            android:id="@+id/btnListReport"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ispis/Dodavanje Izvještaja"
+            android:text="Ispis Izvještaja"
             android:textSize="18sp"
             android:textAllCaps="false"
             android:padding="18dp"

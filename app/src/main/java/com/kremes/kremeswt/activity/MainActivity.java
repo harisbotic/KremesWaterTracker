@@ -12,8 +12,10 @@ import com.kremes.kremeswt.database.KremesDatabase;
 public class MainActivity extends AppCompatActivity implements Button.OnClickListener{
 
     Button btnStatistics;
+    Button btnNewReport;
     Button btnNewPayment;
     Button btnChangeWaterFee;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,8 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
         btnStatistics = findViewById(R.id.btnStatistics);
         btnStatistics.setOnClickListener(this);
+        btnNewReport = findViewById(R.id.btnNewReport);
+        btnNewReport.setOnClickListener(this);
         btnNewPayment = findViewById(R.id.btnNewPayment);
         btnNewPayment.setOnClickListener(this);
         btnChangeWaterFee = findViewById(R.id.btnChangeWaterFee);
@@ -44,6 +48,10 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         switch (v.getId()) {
             case R.id.btnStatistics:
                 startActivity(new Intent(MainActivity.this, MenuStatisticsActivity.class));
+                break;
+
+            case R.id.btnNewReport:
+                //startActivity(new Intent(MainActivity.this, MenuStatisticsActivity.class));
                 break;
 
             case R.id.btnNewPayment:

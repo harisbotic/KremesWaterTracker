@@ -34,6 +34,16 @@
             android:textSize="18sp" />
 
         <Button
+            android:id="@+id/btnNewReport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:padding="18dp"
+            android:text="Novi Izvještaj"
+            android:textAllCaps="false"
+            android:textSize="18sp" />
+
+        <Button
             android:id="@+id/btnNewPayment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
