@@ -32,7 +32,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activity.MenuStatisticsActivity"></activity>
+        <activity android:name=".activity.MenuStatisticsActivity" />
+        <activity android:name=".activity.WaterFeeActivity"></activity>
     </application>
 
 </manifest>

@@ -18,9 +18,12 @@ public class MenuStatisticsActivity extends AppCompatActivity implements Button.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_statistics);
 
-        btnListCitizenStatus = (Button) findViewById(R.id.btnListCitizenStatus);
-        btnListAddReport = (Button) findViewById(R.id.btnListAddReport);
-        btnListAddCitizen = (Button) findViewById(R.id.btnListAddCitizen);
+        btnListCitizenStatus = findViewById(R.id.btnListCitizenStatus);
+        btnListCitizenStatus.setOnClickListener(this);
+        btnListAddReport = findViewById(R.id.btnListAddReport);
+        btnListAddReport.setOnClickListener(this);
+        btnListAddCitizen = findViewById(R.id.btnListAddCitizen);
+        btnListAddCitizen.setOnClickListener(this);
     }
 
     @Override

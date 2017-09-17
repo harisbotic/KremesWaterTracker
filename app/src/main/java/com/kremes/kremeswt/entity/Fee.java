@@ -13,37 +13,15 @@ import android.arch.persistence.room.PrimaryKey;
         indices = { @Index(value = "date_month", unique = true)}
 )
 public class Fee {
-    @PrimaryKey
-    @ColumnInfo(name = "id")
-    private long id;
+    @PrimaryKey()
+    @ColumnInfo(name = "date_month")
+    private String dateMonth;
 
     @ColumnInfo(name = "price")
     private double price;
 
-    @ColumnInfo(name = "date_month")
-    private String dateMonth;
-
-    public Fee() {
-    }
-
-    public Fee(double price, String forMonth) {
-        this.price = price;
-        this.dateMonth = forMonth;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
+    public Fee(String dateMonth, double price) {
+        this.dateMonth = dateMonth;
         this.price = price;
     }
 
@@ -53,5 +31,13 @@ public class Fee {
 
     public void setDateMonth(String dateMonth) {
         this.dateMonth = dateMonth;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

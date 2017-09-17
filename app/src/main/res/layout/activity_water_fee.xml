@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context="com.kremes.kremeswt.activity.WaterFeeActivity">
+
+    <TextView
+        android:id="@+id/waterFeeActivityTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:text="Cijena Vode po Kubiku"
+        android:textSize="24sp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+        <TextView
+            android:id="@+id/tvPriceForCurrentMonth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textStyle="bold"
+            android:text="Cijena za Septembar ce iznositi: "
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btnChangeWaterFeeForCurrentMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvPriceForCurrentMonth"
+            android:layout_marginTop="8dp"
+            android:layout_alignParentRight="true"
+            android:text="Izmjena Cijene" />
+
+        <TextView
+            android:id="@+id/tvPriceForPrevMonth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnChangeWaterFeeForCurrentMonth"
+            android:layout_marginTop="12dp"
+            android:gravity="right"
+            android:text="Cijena za prošli mjesec je bila: "
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

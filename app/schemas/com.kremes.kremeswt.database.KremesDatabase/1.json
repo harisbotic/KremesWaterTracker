@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "0f1cce899a02f6b8a3b892506425fe25",
+    "identityHash": "6fc396a210d4877d16f5a06eba3df1d7",
     "entities": [
       {
         "tableName": "citizen",
@@ -115,27 +115,22 @@
       },
       {
         "tableName": "fee",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER, `price` REAL, `date_month` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`date_month` TEXT, `price` REAL, PRIMARY KEY(`date_month`))",
         "fields": [
           {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER"
+            "fieldPath": "dateMonth",
+            "columnName": "date_month",
+            "affinity": "TEXT"
           },
           {
             "fieldPath": "price",
             "columnName": "price",
             "affinity": "REAL"
-          },
-          {
-            "fieldPath": "dateMonth",
-            "columnName": "date_month",
-            "affinity": "TEXT"
           }
         ],
         "primaryKey": {
           "columnNames": [
-            "id"
+            "date_month"
           ],
           "autoGenerate": false
         },
@@ -269,7 +264,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"0f1cce899a02f6b8a3b892506425fe25\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"6fc396a210d4877d16f5a06eba3df1d7\")"
     ]
   }
 }

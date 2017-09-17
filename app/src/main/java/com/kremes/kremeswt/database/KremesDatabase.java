@@ -23,7 +23,7 @@ import com.kremes.kremeswt.entity.Report;
 
 @Database(entities = {Citizen.class, Report.class, Fee.class, Payment.class, PaymentRequest.class}, version = 1)
 public abstract class KremesDatabase extends RoomDatabase {
-
+    public static final String DB_NAME = "kremes-database";
     private static KremesDatabase INSTANCE;
 
     public abstract CitizenDao citizenDao();
@@ -35,7 +35,7 @@ public abstract class KremesDatabase extends RoomDatabase {
     public static KremesDatabase getAppDatabase(Context context) {
         if (INSTANCE == null) {
             INSTANCE =
-                    Room.databaseBuilder(context.getApplicationContext(), KremesDatabase.class, "kremes-database")
+                    Room.databaseBuilder(context.getApplicationContext(), KremesDatabase.class, DB_NAME)
                             // allow queries on the main thread.
                             // Don't do this on a real app! See PersistenceBasicSample for an example.
                             .allowMainThreadQueries()

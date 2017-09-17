@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">KremesWT</string>
+    <string name="month01">Januar</string>
+    <string name="month02">Februar</string>
+    <string name="month03">Mart</string>
+    <string name="month04">April</string>
+    <string name="month05">Maj</string>
+    <string name="month06">Juni</string>
+    <string name="month07">Juli</string>
+    <string name="month08">August</string>
+    <string name="month09">Septembar</string>
+    <string name="month10">Oktobar</string>
+    <string name="month11">Novembar</string>
+    <string name="month12">Decembar</string>
 </resources>

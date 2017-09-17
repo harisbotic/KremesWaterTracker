@@ -20,9 +20,14 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnStatistics = (Button) findViewById(R.id.btnStatistics);
-        btnNewPayment = (Button) findViewById(R.id.btnNewPayment);
-        btnChangeWaterFee = (Button) findViewById(R.id.btnChangeWaterFee);
+        btnStatistics = findViewById(R.id.btnStatistics);
+        btnStatistics.setOnClickListener(this);
+        btnNewPayment = findViewById(R.id.btnNewPayment);
+        btnNewPayment.setOnClickListener(this);
+        btnChangeWaterFee = findViewById(R.id.btnChangeWaterFee);
+        btnChangeWaterFee.setOnClickListener(this);
+
+
 
         //DatabaseInitializer.populateAsync(KremesDatabase.getAppDatabase(this));
 
@@ -46,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 break;
 
             case R.id.btnChangeWaterFee:
-                //startActivity(new Intent(MainActivity.this, MenuStatisticsActivity.class));
+                startActivity(new Intent(MainActivity.this, WaterFeeActivity.class));
                 break;
         }
     }
