@@ -3,6 +3,7 @@ package com.kremes.kremeswt.entity;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
@@ -17,7 +18,8 @@ import android.arch.persistence.room.PrimaryKey;
                         parentColumns = "username",
                         childColumns = "citizen_username"
                 )},
-        indices = { @Index(value = "citizen_username")}
+        indices = { @Index(value = "citizen_username"),
+                    @Index(value = {"citizen_username", "date_month"}, unique = true)}
 )
 public class Report {
     @PrimaryKey(autoGenerate = true)
@@ -28,22 +30,23 @@ public class Report {
     private String citizenUsername;
 
     @ColumnInfo(name = "date_month")
-    private long dateMonth;
+    private String dateMonth;
 
     @ColumnInfo(name = "water_amount")
     private long waterAmount;
 
     @ColumnInfo(name = "date_received")
-    private String dateReceived;
+    private long dateReceived;
 
     public Report() {
     }
 
-    public Report(String citizenUsername, int forMonth, long waterAmount, String dateReceived) {
+    @Ignore
+    public Report(String citizenUsername, String dateMonth, long waterAmount) {
         this.citizenUsername = citizenUsername;
-        this.dateMonth = forMonth;
+        this.dateMonth = dateMonth;
         this.waterAmount = waterAmount;
-        this.dateReceived = dateReceived;
+        this.dateReceived = System.currentTimeMillis();
     }
 
     public long getId() {
@@ -62,11 +65,11 @@ public class Report {
         this.citizenUsername = citizenUsername;
     }
 
-    public long getDateMonth() {
+    public String getDateMonth() {
         return dateMonth;
     }
 
-    public void setDateMonth(long dateMonth) {
+    public void setDateMonth(String dateMonth) {
         this.dateMonth = dateMonth;
     }
 
@@ -78,11 +81,11 @@ public class Report {
         this.waterAmount = waterAmount;
     }
 
-    public String getDateReceived() {
+    public long getDateReceived() {
         return dateReceived;
     }
 
-    public void setDateReceived(String dateReceived) {
+    public void setDateReceived(long dateReceived) {
         this.dateReceived = dateReceived;
     }
 }

@@ -38,9 +38,6 @@ public class Citizen {
     @ColumnInfo(name = "balance")
     private long balance;
 
-    @Ignore
-    public Report reportForLastMonth;
-
     public Citizen() {
     }
 

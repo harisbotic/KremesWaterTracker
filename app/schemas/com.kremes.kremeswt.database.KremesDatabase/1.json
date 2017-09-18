@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "73458e775430e363e10c874db569cbcc",
+    "identityHash": "21d12cff06011247e0919e2a6f88c516",
     "entities": [
       {
         "tableName": "citizen",
@@ -55,7 +55,7 @@
       },
       {
         "tableName": "report",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `citizen_username` TEXT, `date_month` INTEGER, `water_amount` INTEGER, `date_received` TEXT, FOREIGN KEY(`citizen_username`) REFERENCES `citizen`(`username`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `citizen_username` TEXT, `date_month` TEXT, `water_amount` INTEGER, `date_received` INTEGER, FOREIGN KEY(`citizen_username`) REFERENCES `citizen`(`username`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "id",
@@ -70,7 +70,7 @@
           {
             "fieldPath": "dateMonth",
             "columnName": "date_month",
-            "affinity": "INTEGER"
+            "affinity": "TEXT"
           },
           {
             "fieldPath": "waterAmount",
@@ -80,7 +80,7 @@
           {
             "fieldPath": "dateReceived",
             "columnName": "date_received",
-            "affinity": "TEXT"
+            "affinity": "INTEGER"
           }
         ],
         "primaryKey": {
@@ -97,6 +97,15 @@
               "citizen_username"
             ],
             "createSql": "CREATE  INDEX `index_report_citizen_username` ON `${TABLE_NAME}` (`citizen_username`)"
+          },
+          {
+            "name": "index_report_citizen_username_date_month",
+            "unique": true,
+            "columnNames": [
+              "citizen_username",
+              "date_month"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_report_citizen_username_date_month` ON `${TABLE_NAME}` (`citizen_username`, `date_month`)"
           }
         ],
         "foreignKeys": [
@@ -264,7 +273,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"73458e775430e363e10c874db569cbcc\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"21d12cff06011247e0919e2a6f88c516\")"
     ]
   }
 }

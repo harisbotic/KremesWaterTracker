@@ -69,7 +69,6 @@ public class CitizenListActivity extends AppCompatActivity {
                     }
                 })
                 .show();
-
         };
 
     private void listAllCitizens() {
@@ -103,7 +102,7 @@ public class CitizenListActivity extends AppCompatActivity {
                     Toast.makeText(CitizenListActivity.this, "Korisnik uspjesno dodan!", Toast.LENGTH_LONG).show();
 
                 } else
-                    Toast.makeText(CitizenListActivity.this, "Doslo je do greske, korisnik nije dodan", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CitizenListActivity.this, "Doslo je do greške, korisnik nije dodan", Toast.LENGTH_LONG).show();
 
             }
         }.execute(newCitzen);

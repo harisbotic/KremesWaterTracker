@@ -37,7 +37,7 @@ public class MenuStatisticsActivity extends AppCompatActivity implements Button.
                 break;
 
             case R.id.btnListReport:
-                //startActivity(new Intent(MainActivity.this, MenuStatisticsActivity.class));
+                startActivity(new Intent(MenuStatisticsActivity.this, ReportListActivity.class));
                 break;
 
             case R.id.btnListAddCitizen:
