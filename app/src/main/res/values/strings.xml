@@ -12,4 +12,5 @@
     <string name="month10">Oktobar</string>
     <string name="month11">Novembar</string>
     <string name="month12">Decembar</string>
+    <string name="title_activity_citizen_list">CitizenListActivity</string>
 </resources>

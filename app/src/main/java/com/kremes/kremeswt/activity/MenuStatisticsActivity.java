@@ -1,5 +1,7 @@
 package com.kremes.kremeswt.activity;
 
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -17,6 +19,7 @@ public class MenuStatisticsActivity extends AppCompatActivity implements Button.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_statistics);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 
         btnListCitizenStatus = findViewById(R.id.btnListCitizenStatus);
         btnListCitizenStatus.setOnClickListener(this);
@@ -38,7 +41,7 @@ public class MenuStatisticsActivity extends AppCompatActivity implements Button.
                 break;
 
             case R.id.btnListAddCitizen:
-                //startActivity(new Intent(MainActivity.this, MenuStatisticsActivity.class));
+                startActivity(new Intent(MenuStatisticsActivity.this, CitizenListActivity.class));
                 break;
         }
     }

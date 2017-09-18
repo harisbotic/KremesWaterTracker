@@ -31,6 +31,10 @@ public class GeneralUtils {
         return context.getSharedPreferences(GlobalSharedPrefKey, Context.MODE_PRIVATE);
     }
 
+    public static String formatCapitalFirstLetter(String str) {
+        return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+    }
+
     public static String getGregorianMonthName(Context context, int month) {
         String[] months = getMonthsByFill(context, "month%02d");
         return months[month];
