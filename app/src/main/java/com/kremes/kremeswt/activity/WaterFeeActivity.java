@@ -125,6 +125,6 @@ public class WaterFeeActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        onDestroy();
+        finish();
     }
 }

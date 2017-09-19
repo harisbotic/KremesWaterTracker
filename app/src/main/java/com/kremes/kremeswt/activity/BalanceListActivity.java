@@ -45,6 +45,6 @@ public class BalanceListActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        onDestroy();
+        finish();
     }
 }

@@ -87,6 +87,6 @@ public class PaymentListActivity extends AppCompatActivity implements AdapterVie
     @Override
     protected void onPause() {
         super.onPause();
-        onDestroy();
+        finish();
     }
 }

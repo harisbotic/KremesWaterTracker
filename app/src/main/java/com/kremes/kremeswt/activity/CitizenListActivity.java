@@ -111,7 +111,7 @@ public class CitizenListActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        onDestroy();
+        finish();
     }
 
 }

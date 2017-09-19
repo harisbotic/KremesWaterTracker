@@ -59,6 +59,6 @@ public class ReportListActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        onDestroy();
+        finish();
     }
 }
