@@ -74,14 +74,19 @@ public class PaymentUtils {
     private static void createNewPayment(final Context context, final Payment newPayment, final PaymentListActivity activity) {
         new AsyncTask<Payment, Void, Boolean>() {
             protected Boolean doInBackground(Payment... newPayments) {
-                return KremesDatabase.getAppDatabase(context).paymentDao().insert(newPayments[0]) >= 0;
+                try {
+                    return KremesDatabase.getAppDatabase(context).paymentDao().insert(newPayments[0]) >= 0;
+                } catch (Exception e) {
+                    return false;
+                }
+
             }
 
             protected void onPostExecute(Boolean r) {
                 if (r == true) {
                     if(activity != null) {
                         activity.listAllPayments(FormatDateMonth(Calendar.getInstance()));
-                    } else
+                    }
                         Toast.makeText(context, "Uplata uspješno unesena", Toast.LENGTH_LONG).show();
                 } else
                     Toast.makeText(context, "Doslo je do greške, Uplata nije dodana", Toast.LENGTH_LONG).show();

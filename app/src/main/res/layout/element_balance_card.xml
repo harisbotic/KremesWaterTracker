@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/citizenCardName"
+            android:id="@+id/balanceCardName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -24,7 +24,7 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/citizenCardPhone"
+            android:id="@+id/balanceCardBalance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -33,7 +33,7 @@
             android:layout_marginBottom="2dp"
             android:layout_marginTop="2dp"
             android:gravity="center"
-            android:text="123456"
+            android:text="123456 KM"
             android:textSize="32sp" />
 
     </RelativeLayout>

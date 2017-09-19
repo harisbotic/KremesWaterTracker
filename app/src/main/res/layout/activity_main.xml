@@ -62,6 +62,16 @@
             android:text="Promjena Cijene Vode"
             android:textAllCaps="false"
             android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btnSendSMSToEveryone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:padding="12dp"
+            android:text="Pošalji SMS Svima"
+            android:textAllCaps="false"
+            android:textSize="12sp" />
     </LinearLayout>
 
     <TextView

@@ -108,4 +108,10 @@ public class CitizenListActivity extends AppCompatActivity {
         }.execute(newCitzen);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        onDestroy();
+    }
+
 }

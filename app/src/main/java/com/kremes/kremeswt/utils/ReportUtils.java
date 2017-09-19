@@ -71,7 +71,11 @@ public class ReportUtils {
     private static void createNewReport(final Context context, final Report newReport, final ReportCard reportCard) {
         new AsyncTask<Report, Void, Boolean>() {
             protected Boolean doInBackground(Report... newReports) {
-                return KremesDatabase.getAppDatabase(context).reportDao().insert(newReports[0]) >= 1;
+                try {
+                    return KremesDatabase.getAppDatabase(context).reportDao().insert(newReports[0]) >= 1;
+                } catch (Exception e) {
+                    return false;
+                }
             }
 
             protected void onPostExecute(Boolean r) {
@@ -79,11 +83,10 @@ public class ReportUtils {
                     if(reportCard != null) {
                         reportCard.citizen.setWaterAmountLastMonth(newReport.getWaterAmount());
                         reportCard.updateUI();
+                    }
                         Toast.makeText(context, "Izvještaj uspješno dodan", Toast.LENGTH_LONG).show();
-                    } else
-                        Toast.makeText(context, "Izvještaj uspješno dodan, restartuj prozor", Toast.LENGTH_LONG).show();
                 } else
-                    Toast.makeText(context, "Doslo je do greške, izvještaj nije dodan", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Greška, Izvještaj vec unesen za ovog korisnika", Toast.LENGTH_LONG).show();
 
             }
         }.execute(newReport);

@@ -28,9 +28,9 @@ public class ReportListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_list);
         db = KremesDatabase.getAppDatabase(ReportListActivity.this);
-        listAllReports();
-
         reportCardHolder = findViewById(R.id.reportCardHolder);
+
+        listAllReports();
 
         FloatingActionButton fab = findViewById(R.id.fabReportAdd);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -54,5 +54,11 @@ public class ReportListActivity extends AppCompatActivity {
                 }
             }
         }.execute();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        onDestroy();
     }
 }

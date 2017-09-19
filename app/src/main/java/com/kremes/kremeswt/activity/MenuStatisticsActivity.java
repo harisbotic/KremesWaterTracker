@@ -13,6 +13,7 @@ public class MenuStatisticsActivity extends AppCompatActivity implements Button.
 
     Button btnListCitizenStatus;
     Button btnListReport;
+    Button btnListPayment;
     Button btnListAddCitizen;
 
     @Override
@@ -27,22 +28,34 @@ public class MenuStatisticsActivity extends AppCompatActivity implements Button.
         btnListReport.setOnClickListener(this);
         btnListAddCitizen = findViewById(R.id.btnListAddCitizen);
         btnListAddCitizen.setOnClickListener(this);
+        btnListPayment = findViewById(R.id.btnListPayment);
+        btnListPayment.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnListCitizenStatus:
-                //startActivity(new Intent(MenuStatisticsActivity.this, MenuStatisticsActivity.class));
+                startActivity(new Intent(MenuStatisticsActivity.this, BalanceListActivity.class));
                 break;
 
             case R.id.btnListReport:
                 startActivity(new Intent(MenuStatisticsActivity.this, ReportListActivity.class));
                 break;
 
+            case R.id.btnListPayment:
+                startActivity(new Intent(MenuStatisticsActivity.this, PaymentListActivity.class));
+                break;
+
             case R.id.btnListAddCitizen:
                 startActivity(new Intent(MenuStatisticsActivity.this, CitizenListActivity.class));
                 break;
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        onDestroy();
     }
 }

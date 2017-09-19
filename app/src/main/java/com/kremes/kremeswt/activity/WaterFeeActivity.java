@@ -121,4 +121,10 @@ public class WaterFeeActivity extends AppCompatActivity {
             }
         }.execute();
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        onDestroy();
+    }
 }

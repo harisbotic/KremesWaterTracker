@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
@@ -25,17 +25,17 @@
 
         <Button
             android:id="@+id/btnListCitizenStatus"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="18dp"
-            android:text="Ispis Stanja Korisnika"
+            android:text="Ispis Stanja"
             android:textAllCaps="false"
             android:textSize="18sp"
             android:layout_marginBottom="8dp"/>
 
         <Button
             android:id="@+id/btnListReport"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ispis Izvještaja"
             android:textSize="18sp"
@@ -44,8 +44,18 @@
             android:layout_marginBottom="8dp"/>
 
         <Button
+            android:id="@+id/btnListPayment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ispis Uplata"
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            android:padding="18dp"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
             android:id="@+id/btnListAddCitizen"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ispis/Dodavanje Korisnika"
             android:textSize="18sp"

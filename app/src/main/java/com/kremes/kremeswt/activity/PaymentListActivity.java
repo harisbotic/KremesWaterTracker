@@ -36,7 +36,6 @@ public class PaymentListActivity extends AppCompatActivity implements AdapterVie
         setContentView(R.layout.activity_payment_list);
 
         db = KremesDatabase.getAppDatabase(PaymentListActivity.this);
-        listAllPayments(FormatDateMonth(Calendar.getInstance()));
 
         paymentCardHolder = findViewById(R.id.paymentCardHolder);
         spinnerMonth = findViewById(R.id.filter_gregorian_month);
@@ -47,6 +46,8 @@ public class PaymentListActivity extends AppCompatActivity implements AdapterVie
 
         spinnerMonth.setOnItemSelectedListener(this);
         spinnerYear.setOnItemSelectedListener(this);
+
+        listAllPayments(FormatDateMonth(Calendar.getInstance()));
 
         FloatingActionButton fab = findViewById(R.id.fabPaymentAdd);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -81,5 +82,11 @@ public class PaymentListActivity extends AppCompatActivity implements AdapterVie
                 }
             }
         }.execute(dateMonth);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        onDestroy();
     }
 }
