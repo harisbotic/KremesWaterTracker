@@ -20,7 +20,7 @@ import android.arch.persistence.room.PrimaryKey;
         indices = { @Index(value = "citizen_username")}
 )
 public class PaymentRequest {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     private long id;
 

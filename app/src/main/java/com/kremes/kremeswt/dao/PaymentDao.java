@@ -15,6 +15,9 @@ import java.util.List;
 
 @Dao
 public interface PaymentDao {
+    @Query("SELECT * FROM payment WHERE id = :paymentId")
+    Payment getById(long paymentId);
+
     @Query("SELECT * FROM payment")
     List<Payment> getAll();
 
@@ -22,8 +25,11 @@ public interface PaymentDao {
     Payment findByUsername(String citizenUsername);
 
     @Insert
-    void insertAll(Payment... payments);
+    long insert(Payment payments);
+
+    @Insert
+    long[] insertAll(Payment... payments);
 
     @Delete
-    void delete(Payment payment);
+    int delete(Payment payment);
 }

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "21d12cff06011247e0919e2a6f88c516",
+    "identityHash": "14f320f894b9a11e13d884dfcd808ae4",
     "entities": [
       {
         "tableName": "citizen",
@@ -157,7 +157,7 @@
       },
       {
         "tableName": "payment",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER, `citizen_username` TEXT, `amount` REAL, `date_paid` TEXT, PRIMARY KEY(`id`), FOREIGN KEY(`citizen_username`) REFERENCES `citizen`(`username`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `citizen_username` TEXT, `amount` REAL, `date_month` TEXT, `date_paid` INTEGER, FOREIGN KEY(`citizen_username`) REFERENCES `citizen`(`username`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "id",
@@ -175,16 +175,21 @@
             "affinity": "REAL"
           },
           {
+            "fieldPath": "dateMonth",
+            "columnName": "date_month",
+            "affinity": "TEXT"
+          },
+          {
             "fieldPath": "datePaid",
             "columnName": "date_paid",
-            "affinity": "TEXT"
+            "affinity": "INTEGER"
           }
         ],
         "primaryKey": {
           "columnNames": [
             "id"
           ],
-          "autoGenerate": false
+          "autoGenerate": true
         },
         "indices": [
           {
@@ -212,7 +217,7 @@
       },
       {
         "tableName": "payment_request",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER, `citizen_username` TEXT, `amount` REAL, `date_requested` TEXT, `date_approved` TEXT, PRIMARY KEY(`id`), FOREIGN KEY(`citizen_username`) REFERENCES `citizen`(`username`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `citizen_username` TEXT, `amount` REAL, `date_requested` TEXT, `date_approved` TEXT, FOREIGN KEY(`citizen_username`) REFERENCES `citizen`(`username`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "id",
@@ -244,7 +249,7 @@
           "columnNames": [
             "id"
           ],
-          "autoGenerate": false
+          "autoGenerate": true
         },
         "indices": [
           {
@@ -273,7 +278,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"21d12cff06011247e0919e2a6f88c516\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"14f320f894b9a11e13d884dfcd808ae4\")"
     ]
   }
 }

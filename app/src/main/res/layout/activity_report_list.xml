@@ -5,12 +5,18 @@
     android:layout_height="match_parent"
     tools:context="com.kremes.kremeswt.activity.ReportListActivity">
 
-    <LinearLayout
-        android:id="@+id/reportCardHolder"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-    </LinearLayout>
+        android:fillViewport="true">
+        <LinearLayout
+            android:id="@+id/reportCardHolder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical">
+        </LinearLayout>
+    </ScrollView>
 
     <com.github.clans.fab.FloatingActionButton
         android:id="@+id/fabReportAdd"

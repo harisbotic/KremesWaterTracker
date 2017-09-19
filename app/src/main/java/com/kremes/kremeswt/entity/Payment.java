@@ -3,6 +3,7 @@ package com.kremes.kremeswt.entity;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
@@ -20,7 +21,7 @@ import android.arch.persistence.room.PrimaryKey;
         indices = { @Index(value = "citizen_username")}
 )
 public class Payment {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     private long id;
 
@@ -30,14 +31,19 @@ public class Payment {
     @ColumnInfo(name = "amount")
     private double amount;
 
+    @ColumnInfo(name = "date_month")
+    private String dateMonth;
+
     @ColumnInfo(name = "date_paid")
-    private String datePaid;
+    private long datePaid;
 
     public Payment() {
     }
 
-    public Payment(String citizenUsername, double amount, String date_paid) {
+    @Ignore
+    public Payment(String citizenUsername, String dateMonth, double amount, long date_paid) {
         this.citizenUsername = citizenUsername;
+        this.dateMonth = dateMonth;
         this.amount = amount;
         this.datePaid = date_paid;
     }
@@ -66,11 +72,19 @@ public class Payment {
         this.amount = amount;
     }
 
-    public String getDatePaid() {
+    public long getDatePaid() {
         return datePaid;
     }
 
-    public void setDatePaid(String datePaid) {
+    public void setDatePaid(long datePaid) {
         this.datePaid = datePaid;
+    }
+
+    public String getDateMonth() {
+        return dateMonth;
+    }
+
+    public void setDateMonth(String dateMonth) {
+        this.dateMonth = dateMonth;
     }
 }

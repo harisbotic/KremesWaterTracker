@@ -7,6 +7,7 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
 import com.kremes.kremeswt.entity.Citizen;
+import com.kremes.kremeswt.model.CitizenWithPayment;
 import com.kremes.kremeswt.model.CitizenWithReport;
 
 import java.util.List;
@@ -26,6 +27,12 @@ public interface CitizenDao {
             "LEFT JOIN report r2 ON r2.date_month = :lastTwoDateMonth AND r2.citizen_username = c.username " +
             "ORDER BY c.first_name ASC")
     List<CitizenWithReport> getAllWithReports(String lastDateMonth, String lastTwoDateMonth);
+
+    @Query("SELECT c.username, c.first_name, c.last_name, c.phone_number, p.id, p.amount, p.date_paid, p.date_month " +
+            "FROM citizen c " +
+            "JOIN payment p ON p.date_month = :dateMonth AND p.citizen_username = c.username " +
+            "ORDER BY p.date_paid DESC")
+    List<CitizenWithPayment> getAllWithPayment(String dateMonth);
 
     @Query("SELECT * FROM citizen WHERE username IN (:citizenUsernames)")
     List<Citizen> loadAllByIds(int[] citizenUsernames);

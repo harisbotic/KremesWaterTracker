@@ -10,7 +10,7 @@ import android.widget.Button;
 import com.kremes.kremeswt.R;
 import com.kremes.kremeswt.database.KremesDatabase;
 
-public class MainActivity extends AppCompatActivity implements Button.OnClickListener{
+public class MainActivity extends AppCompatActivity implements Button.OnClickListener {
 
     Button btnStatistics;
     Button btnNewReport;
@@ -33,10 +33,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         btnChangeWaterFee = findViewById(R.id.btnChangeWaterFee);
         btnChangeWaterFee.setOnClickListener(this);
 
-
-
-        //DatabaseInitializer.populateAsync(KremesDatabase.getAppDatabase(this));
-
     }
 
     @Override
@@ -57,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 break;
 
             case R.id.btnNewPayment:
-                //startActivity(new Intent(MainActivity.this, MenuStatisticsActivity.class));
+                startActivity(new Intent(MainActivity.this, PaymentListActivity.class));
                 break;
 
             case R.id.btnChangeWaterFee:

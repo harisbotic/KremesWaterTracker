@@ -16,8 +16,12 @@ import com.kremes.kremeswt.database.KremesDatabase;
 import com.kremes.kremeswt.entity.Report;
 import com.kremes.kremeswt.model.CitizenWithReport;
 
+import java.util.Calendar;
+
 import static com.kremes.kremeswt.utils.CitizenUtils.getCitizenFullName;
 import static com.kremes.kremeswt.utils.GeneralUtils.FormatDateMonth;
+import static com.kremes.kremeswt.utils.GeneralUtils.getGregorianMonthName;
+import static com.kremes.kremeswt.utils.GeneralUtils.getMonthNumberFromDateMonth;
 import static com.kremes.kremeswt.utils.ReportUtils.displayNewReportDialog;
 
 /**
@@ -62,7 +66,8 @@ public class ReportCard extends RelativeLayout implements CardView.OnClickListen
     }
 
     private void updateUI() {
-        reportCardAmount.setText("Maj: " + citizen.getWaterAmountLastMonth());
+        int monthNumber = getMonthNumberFromDateMonth(FormatDateMonth(Calendar.getInstance()));
+        reportCardAmount.setText(getGregorianMonthName(context, monthNumber) + ": " + citizen.getWaterAmountLastMonth());
     }
 
     private void showDeleteReportDialog() {
