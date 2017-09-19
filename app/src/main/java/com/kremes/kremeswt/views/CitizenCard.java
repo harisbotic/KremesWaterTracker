@@ -103,7 +103,7 @@ public class CitizenCard extends RelativeLayout implements CardView.OnClickListe
             }
 
             protected void onPostExecute(Void r) {
-                Toast.makeText(context, "Podaci Uspjesno Izmjenjeni", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Podaci Uspješno Izmjenjeni", Toast.LENGTH_LONG).show();
                 citizenCardPhone.setText(citizen.getPhoneNumber());
             }
         }.execute();
@@ -113,9 +113,9 @@ public class CitizenCard extends RelativeLayout implements CardView.OnClickListe
         new MaterialDialog.Builder(context)
                 .title(getCitizenFullName(citizen) + " ?")
                 .content("Da li sigurno želite izbrisati Korisnika?\nUkoliko se Korisnik izbriše, izbrisat ce se i svi njegovi podaci!!!")
-                .positiveText("NE ŽELIM")
-                .negativeText("IZBRIŠI")
-                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                .positiveText("IZBRIŠI")
+                .negativeText("NE ŽELIM")
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         deleteThisCitizen();

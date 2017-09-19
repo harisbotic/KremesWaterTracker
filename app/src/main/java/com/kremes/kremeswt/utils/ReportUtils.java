@@ -14,6 +14,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.kremes.kremeswt.R;
 import com.kremes.kremeswt.database.KremesDatabase;
 import com.kremes.kremeswt.entity.Report;
+import com.kremes.kremeswt.views.ReportCard;
 
 import static com.kremes.kremeswt.utils.CitizenUtils.displaysearchCitizensDialog;
 import static com.kremes.kremeswt.utils.CitizenUtils.formatUsername;
@@ -25,7 +26,7 @@ import static com.kremes.kremeswt.utils.GeneralUtils.FormatDateMonth;
 
 public class ReportUtils {
 
-    public static void displayNewReportDialog(final Context context, final String citizenFullName) {
+    public static void displayNewReportDialog(final Context context, final String citizenFullName, final ReportCard reportCard) {
         final MaterialDialog dialogAddReport = new MaterialDialog.Builder(context)
                 .title("Novi Izvještaj")
                 .customView(R.layout.dialog_report_add, false)
@@ -48,7 +49,7 @@ public class ReportUtils {
                                 FormatDateMonth(-1),
                                 Long.parseLong(newAmount.getText().toString()));
 
-                        createNewReport(context, newReport);
+                        createNewReport(context, newReport, reportCard);
                     }
                 })
                 .build();
@@ -67,7 +68,7 @@ public class ReportUtils {
         dialogAddReport.show();
     }
 
-    private static void createNewReport(final Context context, final Report newReport) {
+    private static void createNewReport(final Context context, final Report newReport, final ReportCard reportCard) {
         new AsyncTask<Report, Void, Boolean>() {
             protected Boolean doInBackground(Report... newReports) {
                 return KremesDatabase.getAppDatabase(context).reportDao().insert(newReports[0]) >= 1;
@@ -75,7 +76,12 @@ public class ReportUtils {
 
             protected void onPostExecute(Boolean r) {
                 if (r == true) {
-                    Toast.makeText(context, "Izvještaj uspjesno dodan, restartuj prozor", Toast.LENGTH_LONG).show();
+                    if(reportCard != null) {
+                        reportCard.citizen.setWaterAmountLastMonth(newReport.getWaterAmount());
+                        reportCard.updateUI();
+                        Toast.makeText(context, "Izvještaj uspješno dodan", Toast.LENGTH_LONG).show();
+                    } else
+                        Toast.makeText(context, "Izvještaj uspješno dodan, restartuj prozor", Toast.LENGTH_LONG).show();
                 } else
                     Toast.makeText(context, "Doslo je do greške, izvještaj nije dodan", Toast.LENGTH_LONG).show();
 

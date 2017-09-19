@@ -36,7 +36,7 @@ public class ReportListActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                displayNewReportDialog(ReportListActivity.this, "");
+                displayNewReportDialog(ReportListActivity.this, "", null);
             }
         });
     }

@@ -99,7 +99,7 @@ public class CitizenListActivity extends AppCompatActivity {
             protected void onPostExecute(Citizen createdCitizen) {
                 if(createdCitizen != null) {
                     citizenCardHolder.addView(new CitizenCard(CitizenListActivity.this, createdCitizen),0);
-                    Toast.makeText(CitizenListActivity.this, "Korisnik uspjesno dodan!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CitizenListActivity.this, "Korisnik uspješno dodan!", Toast.LENGTH_LONG).show();
 
                 } else
                     Toast.makeText(CitizenListActivity.this, "Doslo je do greške, korisnik nije dodan", Toast.LENGTH_LONG).show();

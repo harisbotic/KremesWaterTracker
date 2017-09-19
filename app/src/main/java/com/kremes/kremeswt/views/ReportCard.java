@@ -1,6 +1,7 @@
 package com.kremes.kremeswt.views;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
@@ -16,8 +17,6 @@ import com.kremes.kremeswt.database.KremesDatabase;
 import com.kremes.kremeswt.entity.Report;
 import com.kremes.kremeswt.model.CitizenWithReport;
 
-import java.util.Calendar;
-
 import static com.kremes.kremeswt.utils.CitizenUtils.getCitizenFullName;
 import static com.kremes.kremeswt.utils.GeneralUtils.FormatDateMonth;
 import static com.kremes.kremeswt.utils.GeneralUtils.getGregorianMonthName;
@@ -32,10 +31,13 @@ public class ReportCard extends RelativeLayout implements CardView.OnClickListen
     Context context;
     KremesDatabase db;
 
-    TextView reportCardName;
-    TextView reportCardAmount;
+    CardView reportCardLayout;
 
-    CitizenWithReport citizen;
+    TextView reportCardName;
+    TextView reportCardLastMonthAmount;
+    TextView reportCardLastTwoMonthAmount;
+
+    public CitizenWithReport citizen;
 
     public ReportCard(Context context, CitizenWithReport citizen) {
         super(context);
@@ -49,34 +51,46 @@ public class ReportCard extends RelativeLayout implements CardView.OnClickListen
 
     private void init() {
         inflate(getContext(), R.layout.element_report_card, this);
+        reportCardLayout = findViewById(R.id.reportCardLayout);
         reportCardName = findViewById(R.id.reportCardName);
         reportCardName.setText(getCitizenFullName(citizen));
-        reportCardAmount = findViewById(R.id.reportCardAmount);
+        reportCardLastMonthAmount = findViewById(R.id.reportCardLastMonthAmount);
+        reportCardLastTwoMonthAmount = findViewById(R.id.reportCardLastTwoMonthAmount);
         updateUI();
     }
 
     @Override
     public void onClick(View v) {
         if(citizen.getWaterAmountLastMonth() <= 0)
-            displayNewReportDialog(context, getCitizenFullName(citizen));
+            displayNewReportDialog(context, getCitizenFullName(citizen), this);
         else
             showDeleteReportDialog();
 
 
     }
 
-    private void updateUI() {
-        int monthNumber = getMonthNumberFromDateMonth(FormatDateMonth(Calendar.getInstance()));
-        reportCardAmount.setText(getGregorianMonthName(context, monthNumber) + ": " + citizen.getWaterAmountLastMonth());
+    public void updateUI() {
+        int monthNumber = getMonthNumberFromDateMonth(FormatDateMonth(-1));
+        int monthNumber2 = getMonthNumberFromDateMonth(FormatDateMonth(-2));
+
+        if(citizen.getWaterAmountLastMonth() <=0) {
+            reportCardLayout.setBackgroundColor(Color.parseColor("#EF5350"));
+            reportCardLastMonthAmount.setText("Nije uneseno za " + getGregorianMonthName(context, monthNumber));
+        } else {
+            reportCardLayout.setBackgroundColor(Color.parseColor("#26A69A"));
+            reportCardLastMonthAmount.setText(getGregorianMonthName(context, monthNumber) + ": " + citizen.getWaterAmountLastMonth());
+        }
+
+        reportCardLastTwoMonthAmount.setText(getGregorianMonthName(context, monthNumber2) + ": " + citizen.getWaterAmountLastTwoMonth());
     }
 
     private void showDeleteReportDialog() {
         new MaterialDialog.Builder(context)
                 .title("Brisanje zadnjeg izvještaja?")
                 .content("Da li sigurno želite izbrisati zadnji izvještaj od " + getCitizenFullName(citizen))
-                .positiveText("NE ŽELIM")
-                .negativeText("IZBRIŠI")
-                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                .positiveText("IZBRIŠI")
+                .negativeText("NE ŽELIM")
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         deleteThisReport();

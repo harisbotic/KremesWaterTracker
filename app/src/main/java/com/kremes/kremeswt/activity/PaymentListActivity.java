@@ -52,11 +52,12 @@ public class PaymentListActivity extends AppCompatActivity implements AdapterVie
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                displayNewPaymentDialog(PaymentListActivity.this, "");
+                displayNewPaymentDialog(PaymentListActivity.this, "", PaymentListActivity.this);
             }
         });
     }
 
+    @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
         String dateMonth = FormatDateMonth(spinnerMonth.getSelectedItemPosition(),
                                            Integer.parseInt((String)spinnerYear.getSelectedItem()));
@@ -66,7 +67,7 @@ public class PaymentListActivity extends AppCompatActivity implements AdapterVie
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {}
 
-    private void listAllPayments(String dateMonth) {
+    public void listAllPayments(String dateMonth) {
         new AsyncTask<String, Void, List<CitizenWithPayment>>() {
             protected List<CitizenWithPayment> doInBackground(String... dateMonth) {
                 return db.citizenDao().getAllWithPayment(dateMonth[0]);

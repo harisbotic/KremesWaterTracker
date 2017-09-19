@@ -12,8 +12,11 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.kremes.kremeswt.R;
+import com.kremes.kremeswt.activity.PaymentListActivity;
 import com.kremes.kremeswt.database.KremesDatabase;
 import com.kremes.kremeswt.entity.Payment;
+
+import java.util.Calendar;
 
 import static com.kremes.kremeswt.utils.CitizenUtils.displaysearchCitizensDialog;
 import static com.kremes.kremeswt.utils.CitizenUtils.formatUsername;
@@ -25,7 +28,7 @@ import static com.kremes.kremeswt.utils.GeneralUtils.FormatDateMonth;
 
 public class PaymentUtils {
 
-    public static void displayNewPaymentDialog(final Context context, final String citizenFullName) {
+    public static void displayNewPaymentDialog(final Context context, final String citizenFullName, final PaymentListActivity activity) {
         final MaterialDialog dialogAddPayment = new MaterialDialog.Builder(context)
                 .title("Nova Uplata")
                 .customView(R.layout.dialog_payment_add, false)
@@ -49,7 +52,7 @@ public class PaymentUtils {
                                 Double.parseDouble(newAmount.getText().toString()),
                                 System.currentTimeMillis());
 
-                        createNewPayment(context, newPayment);
+                        createNewPayment(context, newPayment, activity);
                     }
                 })
                 .build();
@@ -68,7 +71,7 @@ public class PaymentUtils {
         dialogAddPayment.show();
     }
 
-    private static void createNewPayment(final Context context, final Payment newPayment) {
+    private static void createNewPayment(final Context context, final Payment newPayment, final PaymentListActivity activity) {
         new AsyncTask<Payment, Void, Boolean>() {
             protected Boolean doInBackground(Payment... newPayments) {
                 return KremesDatabase.getAppDatabase(context).paymentDao().insert(newPayments[0]) >= 0;
@@ -76,7 +79,10 @@ public class PaymentUtils {
 
             protected void onPostExecute(Boolean r) {
                 if (r == true) {
-                    Toast.makeText(context, "Uplata uspjesno unesena, restartuj prozor", Toast.LENGTH_LONG).show();
+                    if(activity != null) {
+                        activity.listAllPayments(FormatDateMonth(Calendar.getInstance()));
+                    } else
+                        Toast.makeText(context, "Uplata uspješno unesena", Toast.LENGTH_LONG).show();
                 } else
                     Toast.makeText(context, "Doslo je do greške, Uplata nije dodana", Toast.LENGTH_LONG).show();
 

@@ -62,9 +62,9 @@ public class PaymentCard extends RelativeLayout implements CardView.OnClickListe
         new MaterialDialog.Builder(context)
                 .title("Brisanje uplate?")
                 .content("Da li sigurno želite izbrisati uplatu od " + getCitizenFullName(citizen))
-                .positiveText("NE ŽELIM")
-                .negativeText("IZBRIŠI")
-                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                .positiveText("IZBRIŠI")
+                .negativeText("NE ŽELIM")
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         deleteThisPayment();
