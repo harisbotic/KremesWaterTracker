@@ -6,6 +6,7 @@ import android.os.Environment;
 import android.widget.Toast;
 
 import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
+import com.creativityapps.gmailbackgroundlibrary.util.Utils;
 import com.nbsp.materialfilepicker.MaterialFilePicker;
 
 import java.io.File;
@@ -15,10 +16,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.channels.FileChannel;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import static android.R.attr.src;
 import static com.kremes.kremeswt.database.KremesDatabase.DB_NAME;
 import static com.kremes.kremeswt.database.KremesDatabase.getAppDatabase;
+import static com.kremes.kremeswt.utils.GeneralUtils.formatCurrentDate;
 
 /**
  * Created by Bota on 10/8/2017.
@@ -51,19 +55,19 @@ public class BackupUtils {
                 .withPassword("just2guys")
                 .withMailto("androvana@gmail.com")
                 .withType(BackgroundMail.TYPE_PLAIN)
-                .withSubject("this is the subject")
-                .withBody("this is the body")
+                .withSubject("Kremes Backup " + formatCurrentDate())
+                .withBody("Kremes Backup svih podataka napravljen: " + formatCurrentDate())
                 .withAttachments(getDatabaseFilePath(context))
                 .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
                     @Override
                     public void onSuccess() {
-                       Toast.makeText(context, "mislim da sam poslo'", Toast.LENGTH_LONG).show();
+                       Toast.makeText(context, "Email uspjesno poslan'", Toast.LENGTH_LONG).show();
                     }
                 })
                 .withOnFailCallback(new BackgroundMail.OnFailCallback() {
                     @Override
                     public void onFail() {
-                        Toast.makeText(context, "fejlo' sam", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Email nije poslan, provjeri internet", Toast.LENGTH_LONG).show();
                     }
                 })
                 .send();

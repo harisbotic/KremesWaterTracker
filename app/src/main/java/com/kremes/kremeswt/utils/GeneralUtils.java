@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -58,6 +59,10 @@ public class GeneralUtils {
 
     public static String formatCapitalFirstLetter(String str) {
         return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+    }
+
+    public static String formatCurrentDate() {
+        return new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance());
     }
 
     public static String[] getAllGregorianMonths(Context context) {
