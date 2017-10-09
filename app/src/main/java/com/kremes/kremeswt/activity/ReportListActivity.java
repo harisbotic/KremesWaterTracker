@@ -12,6 +12,7 @@ import com.kremes.kremeswt.database.KremesDatabase;
 import com.kremes.kremeswt.model.CitizenWithReport;
 import com.kremes.kremeswt.views.ReportCard;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.kremes.kremeswt.utils.GeneralUtils.FormatDateMonth;
@@ -49,13 +50,27 @@ public class ReportListActivity extends AppCompatActivity {
             }
 
             protected void onPostExecute(List<CitizenWithReport> allCitizens) {
-                for (CitizenWithReport citizen: allCitizens) {
+                List<CitizenWithReport> newReportList = sortReports(allCitizens);
+                for (CitizenWithReport citizen: newReportList) {
                     reportCardHolder.addView(new ReportCard(ReportListActivity.this, citizen));
                 }
             }
         }.execute();
     }
 
+    private List<CitizenWithReport> sortReports(List<CitizenWithReport> reportList) {
+        ArrayList<CitizenWithReport> greenReports = new ArrayList<>();
+        ArrayList<CitizenWithReport> redReports = new ArrayList<>();
+        for (CitizenWithReport report: reportList) {
+            if(report.getWaterAmountLastMonth() > 0)
+                greenReports.add(report);
+            else
+                redReports.add(report);
+        }
+        redReports.addAll(greenReports);
+        return redReports;
+    }
+    
     @Override
     protected void onPause() {
         super.onPause();

@@ -56,6 +56,5 @@ public class MenuStatisticsActivity extends AppCompatActivity implements Button.
     @Override
     protected void onPause() {
         super.onPause();
-        finish();
     }
 }

@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     protected void onResume() {
         super.onResume();
         UpdateWaterFees(MainActivity.this);
-        //SORT REPORTS
     }
 
     @Override
