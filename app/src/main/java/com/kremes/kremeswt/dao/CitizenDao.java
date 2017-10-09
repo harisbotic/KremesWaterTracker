@@ -4,6 +4,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
+import android.arch.persistence.room.RoomWarnings;
 import android.arch.persistence.room.Update;
 
 import com.kremes.kremeswt.entity.Citizen;
@@ -17,6 +18,7 @@ import java.util.List;
  */
 
 @Dao
+@SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
 public interface CitizenDao {
     @Query("SELECT * FROM citizen ORDER BY first_name ASC")
     List<Citizen> getAll();

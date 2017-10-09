@@ -43,14 +43,33 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Količina u KM:"/>
+            android:text="Iznos u KM:"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/dialogPaymentTvKM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="KM"
+                android:layout_weight="10"
+                android:textStyle="bold"
+                android:textColor="#008000"
+                android:layout_centerInParent="true"
+                android:layout_alignParentRight="true"/>
 
         <EditText
             android:id="@+id/dialogPaymentNewAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
-            android:digits="0123456789."/>
+            android:digits="0123456789."
+            android:layout_alignParentLeft="true"
+            android:gravity="right"
+            android:layout_toLeftOf="@id/dialogPaymentTvKM" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 

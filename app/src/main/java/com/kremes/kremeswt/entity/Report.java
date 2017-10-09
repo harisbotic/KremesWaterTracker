@@ -7,6 +7,8 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
+import static android.arch.persistence.room.ForeignKey.CASCADE;
+
 /**
  * Created by Bota
  */
@@ -16,7 +18,8 @@ import android.arch.persistence.room.PrimaryKey;
                 @ForeignKey(
                         entity = Citizen.class,
                         parentColumns = "username",
-                        childColumns = "citizen_username"
+                        childColumns = "citizen_username",
+                        onDelete = CASCADE
                 )},
         indices = { @Index(value = "citizen_username"),
                     @Index(value = {"citizen_username", "date_month"}, unique = true)}

@@ -24,6 +24,9 @@ public interface FeeDao {
     @Query("SELECT fee.price FROM fee WHERE date_month = :dateMonth LIMIT 1")
     double getByDateMonth(String dateMonth);
 
+    @Query("SELECT COUNT(*) FROM fee")
+    double getFeeCount();
+
     @Update
     void update(Fee fee);
 

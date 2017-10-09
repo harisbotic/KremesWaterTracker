@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "14f320f894b9a11e13d884dfcd808ae4",
+    "identityHash": "c57ff01ada072922a3ba3c9debec0176",
     "entities": [
       {
         "tableName": "citizen",
@@ -55,7 +55,7 @@
       },
       {
         "tableName": "report",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `citizen_username` TEXT, `date_month` TEXT, `water_amount` INTEGER, `date_received` INTEGER, FOREIGN KEY(`citizen_username`) REFERENCES `citizen`(`username`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `citizen_username` TEXT, `date_month` TEXT, `water_amount` INTEGER, `date_received` INTEGER, FOREIGN KEY(`citizen_username`) REFERENCES `citizen`(`username`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -96,7 +96,7 @@
             "columnNames": [
               "citizen_username"
             ],
-            "createSql": "CREATE  INDEX `index_report_citizen_username` ON `${TABLE_NAME}` (`citizen_username`)"
+            "createSql": "CREATE  INDEX `index_report_citizen_username`\nON `${TABLE_NAME}` (`citizen_username`)"
           },
           {
             "name": "index_report_citizen_username_date_month",
@@ -105,13 +105,13 @@
               "citizen_username",
               "date_month"
             ],
-            "createSql": "CREATE UNIQUE INDEX `index_report_citizen_username_date_month` ON `${TABLE_NAME}` (`citizen_username`, `date_month`)"
+            "createSql": "CREATE UNIQUE INDEX `index_report_citizen_username_date_month`\nON `${TABLE_NAME}` (`citizen_username`, `date_month`)"
           }
         ],
         "foreignKeys": [
           {
             "table": "citizen",
-            "onDelete": "NO ACTION",
+            "onDelete": "CASCADE",
             "onUpdate": "NO ACTION",
             "columns": [
               "citizen_username"
@@ -150,14 +150,14 @@
             "columnNames": [
               "date_month"
             ],
-            "createSql": "CREATE UNIQUE INDEX `index_fee_date_month` ON `${TABLE_NAME}` (`date_month`)"
+            "createSql": "CREATE UNIQUE INDEX `index_fee_date_month`\nON `${TABLE_NAME}` (`date_month`)"
           }
         ],
         "foreignKeys": []
       },
       {
         "tableName": "payment",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `citizen_username` TEXT, `amount` REAL, `date_month` TEXT, `date_paid` INTEGER, FOREIGN KEY(`citizen_username`) REFERENCES `citizen`(`username`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `citizen_username` TEXT, `amount` REAL, `date_month` TEXT, `date_paid` INTEGER, FOREIGN KEY(`citizen_username`) REFERENCES `citizen`(`username`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -198,13 +198,13 @@
             "columnNames": [
               "citizen_username"
             ],
-            "createSql": "CREATE  INDEX `index_payment_citizen_username` ON `${TABLE_NAME}` (`citizen_username`)"
+            "createSql": "CREATE  INDEX `index_payment_citizen_username`\nON `${TABLE_NAME}` (`citizen_username`)"
           }
         ],
         "foreignKeys": [
           {
             "table": "citizen",
-            "onDelete": "NO ACTION",
+            "onDelete": "CASCADE",
             "onUpdate": "NO ACTION",
             "columns": [
               "citizen_username"
@@ -217,7 +217,7 @@
       },
       {
         "tableName": "payment_request",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `citizen_username` TEXT, `amount` REAL, `date_requested` TEXT, `date_approved` TEXT, FOREIGN KEY(`citizen_username`) REFERENCES `citizen`(`username`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `citizen_username` TEXT, `amount` REAL, `date_requested` TEXT, `date_approved` TEXT, FOREIGN KEY(`citizen_username`) REFERENCES `citizen`(`username`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -258,13 +258,13 @@
             "columnNames": [
               "citizen_username"
             ],
-            "createSql": "CREATE  INDEX `index_payment_request_citizen_username` ON `${TABLE_NAME}` (`citizen_username`)"
+            "createSql": "CREATE  INDEX `index_payment_request_citizen_username`\nON `${TABLE_NAME}` (`citizen_username`)"
           }
         ],
         "foreignKeys": [
           {
             "table": "citizen",
-            "onDelete": "NO ACTION",
+            "onDelete": "CASCADE",
             "onUpdate": "NO ACTION",
             "columns": [
               "citizen_username"
@@ -278,7 +278,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"14f320f894b9a11e13d884dfcd808ae4\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"c57ff01ada072922a3ba3c9debec0176\")"
     ]
   }
 }

@@ -18,6 +18,7 @@ import java.util.List;
 import static com.kremes.kremeswt.utils.PaymentUtils.displayNewPaymentDialog;
 import static com.kremes.kremeswt.utils.PermissionUtils.checkAndRequestPermissions;
 import static com.kremes.kremeswt.utils.ReportUtils.displayNewReportDialog;
+import static com.kremes.kremeswt.utils.WaterFeeUtils.UpdateWaterFees;
 
 public class MainActivity extends AppCompatActivity implements Button.OnClickListener {
 
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     @Override
     protected void onResume() {
         super.onResume();
-        //CREATE FEES
+        UpdateWaterFees(MainActivity.this);
     }
 
     @Override
