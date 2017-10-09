@@ -63,6 +63,29 @@
             android:textAllCaps="false"
             android:textSize="12sp" />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btnBackupDb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:padding="12dp"
+                android:text="Backup Podataka"
+                android:textAllCaps="false"
+                android:textSize="12sp" />
+            <Button
+                android:id="@+id/btnImportDb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:padding="12dp"
+                android:text="Import Podataka"
+                android:textAllCaps="false"
+                android:textSize="12sp" />
+        </LinearLayout>
+
         <Button
             android:id="@+id/btnSendSMSToEveryone"
             android:layout_width="wrap_content"

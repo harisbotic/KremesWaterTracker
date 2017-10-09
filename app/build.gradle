@@ -38,5 +38,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:' + rootProject.supportLibVersion
     compile 'com.afollestad.material-dialogs:core:0.9.4.7'
     compile 'com.github.clans:fab:1.6.4'
+    compile 'com.github.yesidlazaro:GmailBackground:1.2.0'
+    compile 'com.nbsp:library:1.8'
     testCompile 'junit:junit:4.12'
 }

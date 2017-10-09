@@ -24,6 +24,7 @@ public class PermissionUtils {
         int receivesms = ContextCompat.checkSelfPermission(activity, Manifest.permission.RECEIVE_SMS);
         int readsms = ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_SMS);
         int sendsms = ContextCompat.checkSelfPermission(activity, Manifest.permission.SEND_SMS);
+        int readstorage = ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE);
         List<String> listPermissionsNeeded = new ArrayList<>();
 
         if (receivesms != PackageManager.PERMISSION_GRANTED)
@@ -36,6 +37,9 @@ public class PermissionUtils {
         }
         if (sendsms != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.SEND_SMS);
+        }
+        if (readstorage != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.READ_EXTERNAL_STORAGE);
         }
 
         if (!listPermissionsNeeded.isEmpty())
