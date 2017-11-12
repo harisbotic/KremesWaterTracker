@@ -37,6 +37,7 @@ public class SMSUtils {
 
                 if(!lastReadSmsId.equals(smsMsg.getDate())) {
                     // use msgData
+
                 }
                 else { break; }
             } while (c.moveToNext());

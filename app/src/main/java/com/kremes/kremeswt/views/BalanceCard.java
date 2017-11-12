@@ -44,7 +44,8 @@ public class BalanceCard extends RelativeLayout implements View.OnClickListener 
         balanceCardName = findViewById(R.id.balanceCardName);
         balanceCardName.setText(getCitizenFullName(citizen));
         balanceCardBalance = findViewById(R.id.balanceCardBalance);
-        balanceCardBalance.setText(citizen.getBalance() + " KM");
+        String plusSign = (citizen.getBalance() > 0)? "+": "";
+        balanceCardBalance.setText(plusSign + citizen.getBalance() + " KM");
     }
 
     @Override

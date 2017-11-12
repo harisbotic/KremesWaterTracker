@@ -21,6 +21,9 @@ public interface ReportDao {
     @Query("SELECT * FROM report WHERE id = :dateMonth")
     List<Report> getAllForDateMonth(String dateMonth);
 
+    @Query("SELECT * FROM report WHERE citizen_username = :username")
+    List<Report> getAllForUsername(String username);
+
     @Query("SELECT * FROM report WHERE citizen_username = :username AND date_month = :dateMonth")
     Report findByUsernameAndDateMonth(String username, String dateMonth);
 

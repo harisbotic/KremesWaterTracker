@@ -33,10 +33,10 @@ public class Citizen {
     private String phoneNumber;
 
     @ColumnInfo(name = "water_spent")
-    private long waterSpent;
+    private double waterSpent;
 
     @ColumnInfo(name = "balance")
-    private long balance;
+    private double balance;
 
     public Citizen() {
     }
@@ -91,19 +91,19 @@ public class Citizen {
         this.phoneNumber = formatCitizenPhoneNumer(phoneNumber);
     }
 
-    public long getWaterSpent() {
+    public double getWaterSpent() {
         return waterSpent;
     }
 
-    public void setWaterSpent(long waterSpent) {
+    public void setWaterSpent(double waterSpent) {
         this.waterSpent = waterSpent;
     }
 
-    public long getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(long balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 }

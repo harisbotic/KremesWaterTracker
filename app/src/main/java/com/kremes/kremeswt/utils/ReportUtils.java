@@ -13,11 +13,14 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.kremes.kremeswt.R;
 import com.kremes.kremeswt.database.KremesDatabase;
+import com.kremes.kremeswt.entity.Citizen;
 import com.kremes.kremeswt.entity.Report;
 import com.kremes.kremeswt.views.ReportCard;
 
 import static com.kremes.kremeswt.utils.CitizenUtils.displaysearchCitizensDialog;
+import static com.kremes.kremeswt.utils.CitizenUtils.formatCitizenPhoneNumer;
 import static com.kremes.kremeswt.utils.CitizenUtils.formatUsername;
+import static com.kremes.kremeswt.utils.CitizenUtils.updateCitizenStatistic;
 import static com.kremes.kremeswt.utils.GeneralUtils.FormatDateMonth;
 
 /**
@@ -69,25 +72,48 @@ public class ReportUtils {
     }
 
     private static void createNewReport(final Context context, final Report newReport, final ReportCard reportCard) {
-        new AsyncTask<Report, Void, Boolean>() {
-            protected Boolean doInBackground(Report... newReports) {
+        new AsyncTask<Report, Void, String>() {
+            protected String doInBackground(Report... newReports) {
                 try {
-                    return KremesDatabase.getAppDatabase(context).reportDao().insert(newReports[0]) >= 1;
+                    KremesDatabase.getAppDatabase(context).reportDao().insert(newReports[0]);
+                    return newReport.getCitizenUsername();
                 } catch (Exception e) {
-                    return false;
+                    return null;
                 }
             }
 
-            protected void onPostExecute(Boolean r) {
-                if (r == true) {
+            protected void onPostExecute(String username) {
+                if (username != null && !username.isEmpty()) {
                     if(reportCard != null) {
                         reportCard.citizen.setWaterAmountLastMonth(newReport.getWaterAmount());
                         reportCard.updateUI();
                     }
+                        updateCitizenStatistic(context, username);
                         Toast.makeText(context, "Izvještaj uspješno dodan", Toast.LENGTH_LONG).show();
                 } else
                     Toast.makeText(context, "Greška, Izvještaj vec unesen za ovog korisnika", Toast.LENGTH_LONG).show();
 
+            }
+        }.execute(newReport);
+    }
+
+    private static void createNewReportByPhoneNumber(final Context context, final Report newReport, final String phoneNumber) {
+        new AsyncTask<Report, Void, String>() {
+            protected String doInBackground(Report... newReports) {
+                try {
+                    String citizenUsername = KremesDatabase.getAppDatabase(context).citizenDao().getByPhoneNumber(formatCitizenPhoneNumer(phoneNumber)).getUsername();
+                    newReport.setCitizenUsername(citizenUsername);
+                    KremesDatabase.getAppDatabase(context).reportDao().insert(newReports[0]);
+                    return citizenUsername;
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+
+            protected void onPostExecute(String username) {
+                if (username != null && !username.isEmpty()) {
+                    updateCitizenStatistic(context, username);
+                }
             }
         }.execute(newReport);
     }

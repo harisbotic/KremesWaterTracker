@@ -21,8 +21,8 @@ public interface PaymentDao {
     @Query("SELECT * FROM payment")
     List<Payment> getAll();
 
-    @Query("SELECT * FROM payment WHERE citizen_username = :citizenUsername LIMIT 1")
-    Payment findByUsername(String citizenUsername);
+    @Query("SELECT * FROM payment WHERE citizen_username = :citizenUsername")
+    List<Payment> getAllForUsername(String citizenUsername);
 
     @Insert
     long insert(Payment payments);

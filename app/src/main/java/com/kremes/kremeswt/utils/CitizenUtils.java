@@ -4,13 +4,20 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.kremes.kremeswt.database.KremesDatabase;
 import com.kremes.kremeswt.entity.Citizen;
+import com.kremes.kremeswt.entity.Fee;
+import com.kremes.kremeswt.entity.Payment;
+import com.kremes.kremeswt.entity.Report;
+import com.kremes.kremeswt.views.ReportCard;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.kremes.kremeswt.utils.WaterFeeUtils.getFeeByDateMonth;
 
 /**
  * Created by Bota
@@ -70,16 +77,39 @@ public class CitizenUtils {
         }.execute();
     }
 
-    public static void getUsernameByName(final Context context, final String name, final TextView textView) {
+    public static void updateCitizenStatistic(final Context context, final String citizenUsername) {
         new AsyncTask<Void, Void, Citizen>() {
-            protected Citizen doInBackground(Void... v) {
-                String first = name.split(" ")[0];
-                String last = name.split(" ")[1];
-                return KremesDatabase.getAppDatabase(context).citizenDao().getByName(first, last);
+            protected Citizen doInBackground(Void... voids) {
+                try {
+                    List<Fee> allFees = KremesDatabase.getAppDatabase(context).feeDao().getAll();
+                    List<Report> allReports = KremesDatabase.getAppDatabase(context).reportDao().getAllForUsername(citizenUsername);
+                    List<Payment> allPayments = KremesDatabase.getAppDatabase(context).paymentDao().getAllForUsername(citizenUsername);
+                    double lastMonthReportAmount = 0;
+                    double newBalance = 0;
+                    for (Report report: allReports) {
+                        Fee fee = getFeeByDateMonth(allFees, report.getDateMonth());
+                        if(fee != null) {
+                            newBalance -= fee.getPrice() * (report.getWaterAmount() - lastMonthReportAmount);
+                        }
+                    }
+                    for (Payment payment:allPayments) {
+                        newBalance += payment.getAmount();
+                    }
+
+                    Citizen citizen = KremesDatabase.getAppDatabase(context).citizenDao().getByUsername(citizenUsername);
+                    citizen.setBalance(newBalance);
+
+                    KremesDatabase.getAppDatabase(context).citizenDao().update(citizen);
+                    return citizen;
+                } catch (Exception e) {
+                    return null;
+                }
             }
 
             protected void onPostExecute(Citizen citizen) {
-                textView.setText(citizen.getUsername());
+                if (citizen != null) {
+                    //Send SMS
+                }
             }
         }.execute();
     }

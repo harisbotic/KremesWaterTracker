@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "c57ff01ada072922a3ba3c9debec0176",
+    "identityHash": "ccfd7cbf9d543a19b2ba9852a0cfd3b9",
     "entities": [
       {
         "tableName": "citizen",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`username` TEXT, `first_name` TEXT, `last_name` TEXT, `date_joined` TEXT, `phone_number` TEXT, `water_spent` INTEGER, `balance` INTEGER, PRIMARY KEY(`username`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`username` TEXT, `first_name` TEXT, `last_name` TEXT, `date_joined` TEXT, `phone_number` TEXT, `water_spent` REAL, `balance` REAL, PRIMARY KEY(`username`))",
         "fields": [
           {
             "fieldPath": "username",
@@ -36,12 +36,12 @@
           {
             "fieldPath": "waterSpent",
             "columnName": "water_spent",
-            "affinity": "INTEGER"
+            "affinity": "REAL"
           },
           {
             "fieldPath": "balance",
             "columnName": "balance",
-            "affinity": "INTEGER"
+            "affinity": "REAL"
           }
         ],
         "primaryKey": {
@@ -278,7 +278,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"c57ff01ada072922a3ba3c9debec0176\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"ccfd7cbf9d543a19b2ba9852a0cfd3b9\")"
     ]
   }
 }

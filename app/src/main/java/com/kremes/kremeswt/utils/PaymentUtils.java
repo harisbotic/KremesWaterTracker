@@ -20,6 +20,7 @@ import java.util.Calendar;
 
 import static com.kremes.kremeswt.utils.CitizenUtils.displaysearchCitizensDialog;
 import static com.kremes.kremeswt.utils.CitizenUtils.formatUsername;
+import static com.kremes.kremeswt.utils.CitizenUtils.updateCitizenStatistic;
 import static com.kremes.kremeswt.utils.GeneralUtils.FormatDateMonth;
 
 /**
@@ -72,21 +73,23 @@ public class PaymentUtils {
     }
 
     private static void createNewPayment(final Context context, final Payment newPayment, final PaymentListActivity activity) {
-        new AsyncTask<Payment, Void, Boolean>() {
-            protected Boolean doInBackground(Payment... newPayments) {
+        new AsyncTask<Payment, Void, String>() {
+            protected String doInBackground(Payment... newPayments) {
                 try {
-                    return KremesDatabase.getAppDatabase(context).paymentDao().insert(newPayments[0]) >= 0;
+                    KremesDatabase.getAppDatabase(context).paymentDao().insert(newPayments[0]);
+                    return newPayment.getCitizenUsername();
                 } catch (Exception e) {
-                    return false;
+                    return null;
                 }
 
             }
 
-            protected void onPostExecute(Boolean r) {
-                if (r == true) {
+            protected void onPostExecute(String username) {
+                if (username != null && !username.isEmpty()) {
                     if(activity != null) {
                         activity.listAllPayments(FormatDateMonth(Calendar.getInstance()));
                     }
+                        updateCitizenStatistic(context, username);
                         Toast.makeText(context, "Uplata uspješno unesena", Toast.LENGTH_LONG).show();
                 } else
                     Toast.makeText(context, "Doslo je do greške, Uplata nije dodana", Toast.LENGTH_LONG).show();

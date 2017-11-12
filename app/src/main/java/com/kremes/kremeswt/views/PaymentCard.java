@@ -17,6 +17,7 @@ import com.kremes.kremeswt.entity.Payment;
 import com.kremes.kremeswt.model.CitizenWithPayment;
 
 import static com.kremes.kremeswt.utils.CitizenUtils.getCitizenFullName;
+import static com.kremes.kremeswt.utils.CitizenUtils.updateCitizenStatistic;
 import static com.kremes.kremeswt.utils.GeneralUtils.formatNormalDate;
 
 /**
@@ -82,6 +83,7 @@ public class PaymentCard extends RelativeLayout implements CardView.OnClickListe
 
             protected void onPostExecute(Boolean r) {
                 setVisibility(GONE);
+                updateCitizenStatistic(context, citizen.getUsername());
                 Toast.makeText(context, "Uplata Izbrisana", Toast.LENGTH_LONG).show();
             }
         }.execute();

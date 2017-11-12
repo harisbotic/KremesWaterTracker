@@ -18,6 +18,7 @@ import com.kremes.kremeswt.entity.Report;
 import com.kremes.kremeswt.model.CitizenWithReport;
 
 import static com.kremes.kremeswt.utils.CitizenUtils.getCitizenFullName;
+import static com.kremes.kremeswt.utils.CitizenUtils.updateCitizenStatistic;
 import static com.kremes.kremeswt.utils.GeneralUtils.FormatDateMonth;
 import static com.kremes.kremeswt.utils.GeneralUtils.getGregorianMonthName;
 import static com.kremes.kremeswt.utils.GeneralUtils.getMonthNumberFromDateMonth;
@@ -109,6 +110,7 @@ public class ReportCard extends RelativeLayout implements CardView.OnClickListen
             protected void onPostExecute(Boolean r) {
                 citizen.setWaterAmountLastMonth(0);
                 updateUI();
+                updateCitizenStatistic(context, citizen.getUsername());
                 Toast.makeText(context, "Izvještaja Izbrisan", Toast.LENGTH_LONG).show();
             }
         }.execute();
