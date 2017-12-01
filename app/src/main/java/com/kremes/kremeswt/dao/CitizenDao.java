@@ -49,6 +49,9 @@ public interface CitizenDao {
     @Query("SELECT * FROM citizen WHERE phone_number = :phone LIMIT 1")
     Citizen getByPhoneNumber(String phone);
 
+    @Query("SELECT * FROM citizen WHERE water_meter_number = :waterMeterNumber LIMIT 1")
+    Citizen getByWaterMeterNumber(long waterMeterNumber);
+
     @Query("SELECT * FROM citizen WHERE first_name LIKE :first AND "
             + "last_name LIKE :last LIMIT 1")
     Citizen findByName(String first, String last);

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.kremes.kremeswt.database.KremesDatabase;
@@ -12,11 +11,11 @@ import com.kremes.kremeswt.entity.Citizen;
 import com.kremes.kremeswt.entity.Fee;
 import com.kremes.kremeswt.entity.Payment;
 import com.kremes.kremeswt.entity.Report;
-import com.kremes.kremeswt.views.ReportCard;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.kremes.kremeswt.utils.SMSUtils.sendSuccessSMS;
 import static com.kremes.kremeswt.utils.WaterFeeUtils.getFeeByDateMonth;
 
 /**
@@ -84,12 +83,14 @@ public class CitizenUtils {
                     List<Fee> allFees = KremesDatabase.getAppDatabase(context).feeDao().getAll();
                     List<Report> allReports = KremesDatabase.getAppDatabase(context).reportDao().getAllForUsername(citizenUsername);
                     List<Payment> allPayments = KremesDatabase.getAppDatabase(context).paymentDao().getAllForUsername(citizenUsername);
-                    double lastMonthReportAmount = 0;
+                    final double fixedMonthlyCost = 3;
                     double newBalance = 0;
+                    double totalWaterSpent = 0;
                     for (Report report: allReports) {
                         Fee fee = getFeeByDateMonth(allFees, report.getDateMonth());
                         if(fee != null) {
-                            newBalance -= fee.getPrice() * (report.getWaterAmount() - lastMonthReportAmount);
+                            newBalance -= (fee.getPrice() * report.getWaterAmount()) + fixedMonthlyCost;
+                            totalWaterSpent += report.getWaterAmount();
                         }
                     }
                     for (Payment payment:allPayments) {
@@ -98,6 +99,7 @@ public class CitizenUtils {
 
                     Citizen citizen = KremesDatabase.getAppDatabase(context).citizenDao().getByUsername(citizenUsername);
                     citizen.setBalance(newBalance);
+                    citizen.setWaterSpent(totalWaterSpent);
 
                     KremesDatabase.getAppDatabase(context).citizenDao().update(citizen);
                     return citizen;
@@ -108,7 +110,9 @@ public class CitizenUtils {
 
             protected void onPostExecute(Citizen citizen) {
                 if (citizen != null) {
-                    //Send SMS
+                    String balance = (citizen.getBalance() <= 0)? ""+citizen.getBalance() : "+" + citizen.getBalance();
+                    long waterSpent = (long)citizen.getWaterSpent();
+                    sendSuccessSMS(context, citizen.getPhoneNumber(), citizen.getWaterMeterNumber(), waterSpent, balance);
                 }
             }
         }.execute();

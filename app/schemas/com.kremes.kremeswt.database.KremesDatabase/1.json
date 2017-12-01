@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "ccfd7cbf9d543a19b2ba9852a0cfd3b9",
+    "identityHash": "a95b1bed99fdbd2a8c434191933c3e53",
     "entities": [
       {
         "tableName": "citizen",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`username` TEXT, `first_name` TEXT, `last_name` TEXT, `date_joined` TEXT, `phone_number` TEXT, `water_spent` REAL, `balance` REAL, PRIMARY KEY(`username`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`username` TEXT, `first_name` TEXT, `last_name` TEXT, `date_joined` TEXT, `phone_number` TEXT, `water_meter_number` INTEGER, `water_spent` REAL, `balance` REAL, PRIMARY KEY(`username`))",
         "fields": [
           {
             "fieldPath": "username",
@@ -32,6 +32,11 @@
             "fieldPath": "phoneNumber",
             "columnName": "phone_number",
             "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "waterMeterNumber",
+            "columnName": "water_meter_number",
+            "affinity": "INTEGER"
           },
           {
             "fieldPath": "waterSpent",
@@ -96,7 +101,7 @@
             "columnNames": [
               "citizen_username"
             ],
-            "createSql": "CREATE  INDEX `index_report_citizen_username`\nON `${TABLE_NAME}` (`citizen_username`)"
+            "createSql": "CREATE  INDEX `index_report_citizen_username` ON `${TABLE_NAME}` (`citizen_username`)"
           },
           {
             "name": "index_report_citizen_username_date_month",
@@ -105,7 +110,7 @@
               "citizen_username",
               "date_month"
             ],
-            "createSql": "CREATE UNIQUE INDEX `index_report_citizen_username_date_month`\nON `${TABLE_NAME}` (`citizen_username`, `date_month`)"
+            "createSql": "CREATE UNIQUE INDEX `index_report_citizen_username_date_month` ON `${TABLE_NAME}` (`citizen_username`, `date_month`)"
           }
         ],
         "foreignKeys": [
@@ -150,7 +155,7 @@
             "columnNames": [
               "date_month"
             ],
-            "createSql": "CREATE UNIQUE INDEX `index_fee_date_month`\nON `${TABLE_NAME}` (`date_month`)"
+            "createSql": "CREATE UNIQUE INDEX `index_fee_date_month` ON `${TABLE_NAME}` (`date_month`)"
           }
         ],
         "foreignKeys": []
@@ -198,7 +203,7 @@
             "columnNames": [
               "citizen_username"
             ],
-            "createSql": "CREATE  INDEX `index_payment_citizen_username`\nON `${TABLE_NAME}` (`citizen_username`)"
+            "createSql": "CREATE  INDEX `index_payment_citizen_username` ON `${TABLE_NAME}` (`citizen_username`)"
           }
         ],
         "foreignKeys": [
@@ -258,7 +263,7 @@
             "columnNames": [
               "citizen_username"
             ],
-            "createSql": "CREATE  INDEX `index_payment_request_citizen_username`\nON `${TABLE_NAME}` (`citizen_username`)"
+            "createSql": "CREATE  INDEX `index_payment_request_citizen_username` ON `${TABLE_NAME}` (`citizen_username`)"
           }
         ],
         "foreignKeys": [
@@ -278,7 +283,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"ccfd7cbf9d543a19b2ba9852a0cfd3b9\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"a95b1bed99fdbd2a8c434191933c3e53\")"
     ]
   }
 }

@@ -5,7 +5,6 @@ import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -25,10 +24,10 @@ import java.io.IOException;
 import java.util.List;
 
 import static com.kremes.kremeswt.utils.BackupUtils.importBackup;
-import static com.kremes.kremeswt.utils.CitizenUtils.getCitizenFullName;
 import static com.kremes.kremeswt.utils.PaymentUtils.displayNewPaymentDialog;
 import static com.kremes.kremeswt.utils.PermissionUtils.checkAndRequestPermissions;
 import static com.kremes.kremeswt.utils.ReportUtils.displayNewReportDialog;
+import static com.kremes.kremeswt.utils.SMSUtils.readAllSMS;
 import static com.kremes.kremeswt.utils.WaterFeeUtils.UpdateWaterFees;
 
 public class MainActivity extends AppCompatActivity implements Button.OnClickListener {
@@ -75,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     protected void onResume() {
         super.onResume();
         UpdateWaterFees(MainActivity.this);
+        readAllSMS(MainActivity.this);
     }
 
     @Override
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
             protected void onPostExecute(List<Citizen> allCitizens) {
                 String phoneNumbers = "";
                 for (Citizen citizen: allCitizens) {
-                    phoneNumbers = phoneNumbers + citizen.getPhoneNumber() + ",";
+                    phoneNumbers = phoneNumbers + citizen.getPhoneNumber() + ";";
                 }
                 phoneNumbers = phoneNumbers.substring(0, phoneNumbers.length()-1);
                 startActivity(new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + phoneNumbers)));

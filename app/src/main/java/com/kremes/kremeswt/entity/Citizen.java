@@ -32,6 +32,9 @@ public class Citizen {
     @ColumnInfo(name = "phone_number")
     private String phoneNumber;
 
+    @ColumnInfo(name = "water_meter_number")
+    private long waterMeterNumber;
+
     @ColumnInfo(name = "water_spent")
     private double waterSpent;
 
@@ -42,11 +45,12 @@ public class Citizen {
     }
 
     @Ignore
-    public Citizen(String firstName, String lastName, String phoneNumber, long waterSpent, long balance) {
+    public Citizen(String firstName, String lastName, String phoneNumber, long waterMeterNumber, double waterSpent, double balance) {
         this.username = formatUsername(firstName, lastName);
         this.firstName = formatCapitalFirstLetter(firstName);
         this.lastName = formatCapitalFirstLetter(lastName);
         this.phoneNumber = formatCitizenPhoneNumer(phoneNumber);
+        this.waterMeterNumber = waterMeterNumber;
         this.waterSpent = waterSpent;
         this.balance = balance;
     }
@@ -89,6 +93,14 @@ public class Citizen {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = formatCitizenPhoneNumer(phoneNumber);
+    }
+
+    public long getWaterMeterNumber() {
+        return waterMeterNumber;
+    }
+
+    public void setWaterMeterNumber(long waterMeterNumber) {
+        this.waterMeterNumber = waterMeterNumber;
     }
 
     public double getWaterSpent() {

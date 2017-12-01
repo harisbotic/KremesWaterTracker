@@ -5,9 +5,30 @@
     android:layout_height="match_parent"
     tools:context="com.kremes.kremeswt.activity.ReportListActivity">
 
+    <RelativeLayout
+        android:id="@+id/reportTopLayout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true">
+
+        <TextView
+            android:id="@+id/tvTotalWaterSpent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ukupna potrošnja:"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="18dp"/>
+
+
+    </RelativeLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/reportTopLayout"
         android:fillViewport="true">
         <LinearLayout
             android:id="@+id/reportCardHolder"

@@ -5,13 +5,10 @@ import android.os.AsyncTask;
 
 import com.kremes.kremeswt.database.KremesDatabase;
 import com.kremes.kremeswt.entity.Fee;
-import com.kremes.kremeswt.entity.Report;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.kremes.kremeswt.utils.CitizenUtils.formatCitizenPhoneNumer;
-import static com.kremes.kremeswt.utils.CitizenUtils.updateCitizenStatistic;
 import static com.kremes.kremeswt.utils.GeneralUtils.FormatDateMonth;
 
 /**
@@ -33,7 +30,7 @@ public class WaterFeeUtils {
             protected Void doInBackground(Void... voids) {
                 try {
                     if(KremesDatabase.getAppDatabase(context).feeDao().getFeeCount() <= 0) {
-                        Fee newFee = new Fee(FormatDateMonth(-1), 2.2);
+                        Fee newFee = new Fee(FormatDateMonth(-1), 2.5);
                         KremesDatabase.getAppDatabase(context).feeDao().insertAll(newFee);
                         return null;
                     }

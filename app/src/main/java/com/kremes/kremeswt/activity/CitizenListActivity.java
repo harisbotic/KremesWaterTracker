@@ -57,12 +57,14 @@ public class CitizenListActivity extends AppCompatActivity {
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         EditText newName = (EditText) dialog.findViewById(R.id.dialogCitizenNewName);
                         EditText newSurname = (EditText) dialog.findViewById(R.id.dialogCitizenNewSurname);
+                        EditText newWaterMeterNumber = (EditText) dialog.findViewById(R.id.dialogCitizenNewWaterMeterNumber);
                         EditText newPhone = (EditText) dialog.findViewById(R.id.dialogCitizenNewPhone);
 
                         Citizen newCitizen = new Citizen(
                                 newName.getText().toString(),
                                 newSurname.getText().toString(),
                                 newPhone.getText().toString(),
+                                Long.parseLong(newWaterMeterNumber.getText().toString()),
                                 0,0);
 
                         createNewCitizen(newCitizen);

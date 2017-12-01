@@ -18,10 +18,10 @@ import com.kremes.kremeswt.entity.Report;
 import com.kremes.kremeswt.views.ReportCard;
 
 import static com.kremes.kremeswt.utils.CitizenUtils.displaysearchCitizensDialog;
-import static com.kremes.kremeswt.utils.CitizenUtils.formatCitizenPhoneNumer;
 import static com.kremes.kremeswt.utils.CitizenUtils.formatUsername;
 import static com.kremes.kremeswt.utils.CitizenUtils.updateCitizenStatistic;
 import static com.kremes.kremeswt.utils.GeneralUtils.FormatDateMonth;
+import static com.kremes.kremeswt.utils.SMSUtils.sendFailSMS;
 
 /**
  * Created by Bota
@@ -75,6 +75,9 @@ public class ReportUtils {
         new AsyncTask<Report, Void, String>() {
             protected String doInBackground(Report... newReports) {
                 try {
+                    if(newReport.getWaterAmount() < reportCard.citizen.getWaterAmountLastMonth())
+                        Toast.makeText(context, "GRESKA, unijeli ste manji iznos potrosene vode u odnosu na prosli mjesec", Toast.LENGTH_LONG).show();
+
                     KremesDatabase.getAppDatabase(context).reportDao().insert(newReports[0]);
                     return newReport.getCitizenUsername();
                 } catch (Exception e) {
@@ -97,24 +100,33 @@ public class ReportUtils {
         }.execute(newReport);
     }
 
-    private static void createNewReportByPhoneNumber(final Context context, final Report newReport, final String phoneNumber) {
-        new AsyncTask<Report, Void, String>() {
-            protected String doInBackground(Report... newReports) {
+    public static void createNewReport(final Context context, final long waterMeterNumber, final long waterSpentAmount, final String phoneNumber) {
+        new AsyncTask<Void, Void, Citizen>() {
+            protected Citizen doInBackground(Void... voids) {
                 try {
-                    String citizenUsername = KremesDatabase.getAppDatabase(context).citizenDao().getByPhoneNumber(formatCitizenPhoneNumer(phoneNumber)).getUsername();
-                    newReport.setCitizenUsername(citizenUsername);
-                    KremesDatabase.getAppDatabase(context).reportDao().insert(newReports[0]);
-                    return citizenUsername;
+                    Citizen citizen= KremesDatabase.getAppDatabase(context).citizenDao().getByWaterMeterNumber(waterMeterNumber);
+                    if (!citizen.getPhoneNumber().equals(phoneNumber))
+                        sendFailSMS(context, phoneNumber, "GRESKA, novi izvjestaj mozete poslati samo sa vaseg licnog broja, ova opcija je uvedena radi sigurnosti");
+
+                    if(waterSpentAmount < citizen.getWaterSpent())
+                        sendFailSMS(context, phoneNumber, "GRESKA, unijeli ste manji iznos potrosene vode u odnosu na prosli mjesec");
+
+                    Report newReport = new Report(citizen.getUsername(), FormatDateMonth(-1), waterSpentAmount);
+                    KremesDatabase.getAppDatabase(context).reportDao().insert(newReport);
+                    return citizen;
                 } catch (Exception e) {
-                    return null;
+                    sendFailSMS(context, phoneNumber, "GRESKA, provjerite slijedece stvari:\n" +
+                            "1.Broj brojila za vodu (sata)\n" +
+                            "2.Da niste vec jednom poslali obavjestenje za isti mjesec");
                 }
+                return null;
             }
 
-            protected void onPostExecute(String username) {
-                if (username != null && !username.isEmpty()) {
-                    updateCitizenStatistic(context, username);
+            protected void onPostExecute(Citizen citizen) {
+                if(citizen != null) {
+                    updateCitizenStatistic(context, citizen.getUsername());
                 }
             }
-        }.execute(newReport);
+        }.execute();
     }
 }

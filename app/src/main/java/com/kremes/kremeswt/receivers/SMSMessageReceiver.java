@@ -7,9 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.telephony.SmsMessage;
-import android.widget.Toast;
 
-import static com.kremes.kremeswt.utils.GeneralUtils.FormatDateMonth;
 import static com.kremes.kremeswt.utils.SMSUtils.readAllSMS;
 
 /**
@@ -40,14 +38,12 @@ public class SMSMessageReceiver extends BroadcastReceiver {
 
                 String body = sms.getMessageBody().toString();
                 String address = sms.getOriginatingAddress();
-                String datemonth = FormatDateMonth(System.currentTimeMillis());
 
                 messages += "SMS od " + address + " :\n";
                 messages += body + "\n";
             }
 
             // Display SMS message
-            Toast.makeText( context, messages, Toast.LENGTH_SHORT ).show();
         }
 
         final Handler handler = new Handler();
