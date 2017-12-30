@@ -1,13 +1,10 @@
 package com.kremes.kremeswt.utils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Environment;
 import android.widget.Toast;
 
 import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
-import com.creativityapps.gmailbackgroundlibrary.util.Utils;
-import com.nbsp.materialfilepicker.MaterialFilePicker;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,13 +12,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.channels.FileChannel;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
-import static android.R.attr.src;
 import static com.kremes.kremeswt.database.KremesDatabase.DB_NAME;
-import static com.kremes.kremeswt.database.KremesDatabase.getAppDatabase;
 import static com.kremes.kremeswt.utils.GeneralUtils.formatCurrentDate;
 
 /**

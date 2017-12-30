@@ -102,7 +102,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:gravity="center"
-        android:text="Verzija 1.0"
+        android:text="Verzija 1.2"
         android:textColor="#D3D3D3" />
 
 </RelativeLayout>

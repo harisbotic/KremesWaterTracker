@@ -70,7 +70,7 @@ public class ReportListActivity extends AppCompatActivity {
         ArrayList<CitizenWithReport> greenReports = new ArrayList<>();
         ArrayList<CitizenWithReport> redReports = new ArrayList<>();
         for (CitizenWithReport report: reportList) {
-            if(report.getWaterAmountLastMonth() > 0)
+            if(report.getWaterAmountLastMonth() > 0 || report.getWaterSpent() == -1)
                 greenReports.add(report);
             else
                 redReports.add(report);

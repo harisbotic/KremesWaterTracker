@@ -13,10 +13,27 @@
         android:layout_marginBottom="4dp">
 
         <TextView
+            android:id="@+id/tvNewWaterMeterNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Novi Broj Brojaca za vodu (Sata):"/>
+
+        <EditText
+            android:id="@+id/etNewWaterMeterNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvNewWaterMeterNumber"
+            android:inputType="number"
+            android:layout_margin="8dp"
+            android:textSize="16dp"/>
+
+        <TextView
             android:id="@+id/tvNewPhoneNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:layout_below="@id/etNewWaterMeterNumber"
             android:text="Novi Broj Mobitela:"/>
 
         <EditText

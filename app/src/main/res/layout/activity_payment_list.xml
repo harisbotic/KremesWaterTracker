@@ -49,6 +49,14 @@
             android:layout_toRightOf="@id/tvChooseYear"
             android:gravity="end"/>
 
+        <TextView
+            android:id="@+id/ukupno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="25dp"
+            android:textColor="#000000"/>
+
     </RelativeLayout>
 
     <ScrollView

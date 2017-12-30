@@ -79,6 +79,7 @@ public class CitizenUtils {
     public static void updateCitizenStatistic(final Context context, final String citizenUsername) {
         new AsyncTask<Void, Void, Citizen>() {
             protected Citizen doInBackground(Void... voids) {
+                int cheapFeeLimit = 30;
                 try {
                     List<Fee> allFees = KremesDatabase.getAppDatabase(context).feeDao().getAll();
                     List<Report> allReports = KremesDatabase.getAppDatabase(context).reportDao().getAllForUsername(citizenUsername);
@@ -89,10 +90,24 @@ public class CitizenUtils {
                     for (Report report: allReports) {
                         Fee fee = getFeeByDateMonth(allFees, report.getDateMonth());
                         if(fee != null) {
-                            newBalance -= (fee.getPrice() * report.getWaterAmount()) + fixedMonthlyCost;
                             totalWaterSpent += report.getWaterAmount();
+                            if(report.getWaterAmount() <= cheapFeeLimit)
+                                newBalance -= (fee.getPrice() * report.getWaterAmount()) + fixedMonthlyCost;
+                            else {
+                                double waterSpentForThis = report.getWaterAmount();
+                                newBalance -= (fee.getPrice() * cheapFeeLimit);
+                                waterSpentForThis = waterSpentForThis - cheapFeeLimit;
+                                newBalance -= ((fee.getPrice()*3) * waterSpentForThis);
+                                newBalance -= fixedMonthlyCost;
+                            }
+
                         }
                     }
+
+                    if(allReports.size() > 0 && totalWaterSpent == 0) {
+                        totalWaterSpent = -1;
+                    }
+
                     for (Payment payment:allPayments) {
                         newBalance += payment.getAmount();
                     }
@@ -101,8 +116,12 @@ public class CitizenUtils {
                     citizen.setBalance(newBalance);
                     citizen.setWaterSpent(totalWaterSpent);
 
+
+
                     KremesDatabase.getAppDatabase(context).citizenDao().update(citizen);
-                    return citizen;
+                    Citizen citizen2 = KremesDatabase.getAppDatabase(context).citizenDao().getByUsername(citizenUsername);
+
+                    return citizen2;
                 } catch (Exception e) {
                     return null;
                 }
@@ -112,6 +131,8 @@ public class CitizenUtils {
                 if (citizen != null) {
                     String balance = (citizen.getBalance() <= 0)? ""+citizen.getBalance() : "+" + citizen.getBalance();
                     long waterSpent = (long)citizen.getWaterSpent();
+                    if(waterSpent == -1)
+                        waterSpent = 0;
                     sendSuccessSMS(context, citizen.getPhoneNumber(), citizen.getWaterMeterNumber(), waterSpent, balance);
                 }
             }

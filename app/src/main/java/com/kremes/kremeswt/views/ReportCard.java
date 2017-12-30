@@ -74,7 +74,9 @@ public class ReportCard extends RelativeLayout implements CardView.OnClickListen
         int monthNumber = getMonthNumberFromDateMonth(FormatDateMonth(-1));
         int monthNumber2 = getMonthNumberFromDateMonth(FormatDateMonth(-2));
 
-        if(citizen.getWaterAmountLastMonth() <=0) {
+        System.out.println("waterSpent:" + citizen.getWaterSpent());
+
+        if(citizen.getWaterAmountLastMonth() <=0 && citizen.getWaterSpent() != -1) {
             reportCardLayout.setBackgroundColor(Color.parseColor("#EF5350"));
             reportCardLastMonthAmount.setText("Nije uneseno za " + getGregorianMonthName(context, monthNumber));
         } else {

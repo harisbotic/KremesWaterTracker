@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 android:text="Haris Botic"
-                android:layout_marginBottom="-4dp"
+                android:layout_marginBottom="-3dp"
                 android:textSize="24sp" />
 
             <TextView
@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 android:text="12345678"
-                android:layout_marginTop="-4dp"
+                android:layout_marginTop="-3dp"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -47,7 +47,7 @@
             android:layout_marginRight="2dp"
             android:gravity="center"
             android:text="+38763697607"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
     </RelativeLayout>
 

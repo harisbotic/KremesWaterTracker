@@ -7,9 +7,10 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.telephony.SmsManager;
-import android.util.Log;
 
 import com.kremes.kremeswt.model.SMSMsg;
+
+import java.util.ArrayList;
 
 import static com.kremes.kremeswt.utils.GeneralUtils.getGlobalSharedPref;
 import static com.kremes.kremeswt.utils.ReportUtils.createNewReport;
@@ -26,37 +27,47 @@ public class SMSUtils {
     }
 
     public static void readAllSMS(Context context) {
-        String[] projection = {"address", "body", "date"};
+        String[] projection = {"_id", "address", "body", "date"};
         String sortOrder = "date" + " DESC";
         Cursor c = context.getContentResolver().query(Uri.parse("content://sms/inbox"), projection, null, null, sortOrder);
-        String lastReadSmsDate = getLastReadSMSDate(context);
+        int lastReadSmsId = getLastReadSMSId(context);
         SMSMsg smsMsg;
 
         if (c.moveToFirst()) {
-            setLastReadSMSDate(context, c.getString(c.getColumnIndexOrThrow("date")));
+            setLastReadSMSId(context, c.getInt(c.getColumnIndexOrThrow("_id")));
             do {
-                Log.d("MyTag", "stiglaDatuma: " + c.getString(c.getColumnIndexOrThrow("date")));
                 smsMsg = new SMSMsg();
+
+                smsMsg.setId(c.getInt(c.getColumnIndexOrThrow("_id")));
                 smsMsg.setAddress(c.getString(c.getColumnIndexOrThrow("address")));
                 smsMsg.setMessage(c.getString(c.getColumnIndexOrThrow("body")));
                 smsMsg.setDate(c.getString(c.getColumnIndexOrThrow("date")));
 
-                if(lastReadSmsDate.equals(smsMsg.getDate()))
+                if(smsMsg.getId() <= lastReadSmsId)
                     break;
 
-                String[] message = smsMsg.getMessage().trim().split(" ");
+                System.out.println("Prosao:::");
 
-                if(!message[0].toLowerCase().equals("voda"))
+                ArrayList<String> messages = new ArrayList<>();
+                for (String msg: smsMsg.getMessage().trim().split(" ")) {
+                    if(!msg.trim().equals(""))
+                        messages.add(msg);
+                }
+
+                if(messages.size() == 0)
                     continue;
 
-                if(message.length != 3)
+                if(!messages.get(0).toLowerCase().equals("voda"))
+                    continue;
+
+                if(messages.size() != 3)
                     continue;
 
                 long waterMeterNumber = 0;
                 long waterSpent = 0;
                 try {
-                    waterMeterNumber = Long.parseLong(message[1]);
-                    waterSpent = Long.parseLong(message[2]);
+                    waterMeterNumber = Long.parseLong(messages.get(1));
+                    waterSpent = Long.parseLong(messages.get(2));
                 } catch (Exception e) {
                     continue;
                 }
@@ -69,14 +80,14 @@ public class SMSUtils {
         c.close();
     }
 
-    public static String getLastReadSMSDate(Context context) {
+    public static int getLastReadSMSId(Context context) {
         SharedPreferences sharedPref = getGlobalSharedPref(context);
-        return sharedPref.getString(PrefKeyLastReadSMSDate, "");
+        return sharedPref.getInt(PrefKeyLastReadSMSDate, -1);
     }
 
-    private static void setLastReadSMSDate(Context context, String smsID) {
+    private static void setLastReadSMSId(Context context, int smsID) {
         SharedPreferences sharedPref = getGlobalSharedPref(context);
-        sharedPref.edit().putString(PrefKeyLastReadSMSDate, smsID).commit();
+        sharedPref.edit().putInt(PrefKeyLastReadSMSDate, smsID).commit();
     }
 
     public static void sendSuccessSMS(Context context, String phoneNumber, long waterMeterNumber, long waterSpent, String balance )

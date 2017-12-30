@@ -23,7 +23,7 @@ public interface CitizenDao {
     @Query("SELECT * FROM citizen ORDER BY first_name ASC")
     List<Citizen> getAll();
 
-    @Query("SELECT DISTINCT c.username, c.first_name, c.last_name, c.phone_number, r1.water_amount AS waterAmountLastMonth, r2.water_amount AS waterAmountLastTwoMonth " +
+    @Query("SELECT DISTINCT c.username, c.first_name, c.last_name, c.water_spent, c.phone_number, r1.water_amount AS waterAmountLastMonth, r2.water_amount AS waterAmountLastTwoMonth " +
             "FROM citizen c " +
             "LEFT JOIN report r1 ON r1.date_month = :lastDateMonth AND r1.citizen_username = c.username " +
             "LEFT JOIN report r2 ON r2.date_month = :lastTwoDateMonth AND r2.citizen_username = c.username " +

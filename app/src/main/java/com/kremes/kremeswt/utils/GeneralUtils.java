@@ -7,6 +7,7 @@ import android.widget.Spinner;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
@@ -62,7 +63,7 @@ public class GeneralUtils {
     }
 
     public static String formatCurrentDate() {
-        return new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance());
+        return new SimpleDateFormat("dd/MM/yyyy").format(new Date());
     }
 
     public static String[] getAllGregorianMonths(Context context) {

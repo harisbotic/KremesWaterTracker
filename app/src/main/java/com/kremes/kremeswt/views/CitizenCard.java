@@ -29,6 +29,7 @@ public class CitizenCard extends RelativeLayout implements CardView.OnClickListe
 
     TextView citizenCardName;
     TextView citizenCardPhone;
+    TextView citizenCardWaterMeterNumber;
 
     Citizen citizen;
     MaterialDialog dialogEditCitizen;
@@ -49,6 +50,8 @@ public class CitizenCard extends RelativeLayout implements CardView.OnClickListe
         citizenCardName.setText(getCitizenFullName(citizen));
         citizenCardPhone = findViewById(R.id.citizenCardPhone);
         citizenCardPhone.setText(citizen.getPhoneNumber());
+        citizenCardWaterMeterNumber = findViewById(R.id.citizenCardWaterMeterNumber);
+        citizenCardWaterMeterNumber.setText("brojac: " + citizen.getWaterMeterNumber());
 
         dialogEditCitizen = new MaterialDialog.Builder(context)
                                 .title("Izmjena Korisnika")
@@ -61,6 +64,8 @@ public class CitizenCard extends RelativeLayout implements CardView.OnClickListe
                                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                                         EditText editPhoneNumber = (EditText) dialog.findViewById(R.id.etNewPhoneNumber);
                                         citizen.setPhoneNumber(editPhoneNumber.getText().toString());
+                                        EditText editWaterMeterNumber = (EditText) dialog.findViewById(R.id.etNewWaterMeterNumber);
+                                        citizen.setWaterMeterNumber(Long.parseLong(editWaterMeterNumber.getText().toString()));
                                         editThisCitizen();
                                     }
                                 })
@@ -105,6 +110,7 @@ public class CitizenCard extends RelativeLayout implements CardView.OnClickListe
             protected void onPostExecute(Void r) {
                 Toast.makeText(context, "Podaci Uspješno Izmjenjeni", Toast.LENGTH_LONG).show();
                 citizenCardPhone.setText(citizen.getPhoneNumber());
+                citizenCardWaterMeterNumber.setText(citizen.getWaterMeterNumber()+"");
             }
         }.execute();
     }

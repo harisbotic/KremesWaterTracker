@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         btnImportDb.setOnClickListener(this);
         btnSendSMSToEveryone = findViewById(R.id.btnSendSMSToEveryone);
         btnSendSMSToEveryone.setOnClickListener(this);
-
     }
 
     @Override
@@ -142,6 +141,24 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                     .show();
         }
     }
+
+    //DONT UNCOMMENT THIS
+//    private void updateAllUsers() {
+//        new AsyncTask<Void, Void, List<Citizen>>() {
+//            protected List<Citizen> doInBackground(Void... v) {
+//                List<Citizen> citizens =  KremesDatabase.getAppDatabase(MainActivity.this).citizenDao().getAll();
+//                System.out.println("size " + citizens.size());
+//                for (Citizen citizen : citizens) {
+//                    updateCitizenStatistic(MainActivity.this, citizen.getUsername());
+//                }
+//                return citizens;
+//            }
+//
+//            protected void onPostExecute(List<Citizen> allCitizens) {
+//
+//            }
+//        }.execute();
+//    }
 
     private void sendSMSToEveryone() {
         new AsyncTask<Void, Void, List<Citizen>>() {

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.kremes.kremeswt.R;
@@ -27,6 +28,8 @@ public class PaymentListActivity extends AppCompatActivity implements AdapterVie
     Spinner spinnerMonth;
     Spinner spinnerYear;
 
+    TextView ukupno;
+
     LinearLayout paymentCardHolder;
     KremesDatabase db;
 
@@ -40,6 +43,7 @@ public class PaymentListActivity extends AppCompatActivity implements AdapterVie
         paymentCardHolder = findViewById(R.id.paymentCardHolder);
         spinnerMonth = findViewById(R.id.filter_gregorian_month);
         spinnerYear = findViewById(R.id.filter_gregorian_year);
+        ukupno = findViewById(R.id.ukupno);
 
         fillGregorianMonths(spinnerMonth, PaymentListActivity.this);
         fillGregorianYears(spinnerYear, PaymentListActivity.this);
@@ -76,10 +80,14 @@ public class PaymentListActivity extends AppCompatActivity implements AdapterVie
             }
 
             protected void onPostExecute(List<CitizenWithPayment> allCitizens) {
-                paymentCardHolder.removeAllViews();
+                paymentCardHolder.removeAllViews();double number = 0;
+
                 for (CitizenWithPayment citizen: allCitizens) {
+
+                    number += citizen.getAmount();
                     paymentCardHolder.addView(new PaymentCard(PaymentListActivity.this, citizen));
                 }
+                ukupno.setText("Ukupno: " + number + "KM");
             }
         }.execute(dateMonth);
     }

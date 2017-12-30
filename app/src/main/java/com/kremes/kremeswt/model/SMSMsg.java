@@ -6,6 +6,7 @@ package com.kremes.kremeswt.model;
 
 public class SMSMsg {
 
+    private int id;
     private String address;
     private String message;
     private String date;
@@ -17,6 +18,14 @@ public class SMSMsg {
         this.address = address;
         this.message = msg;
         this.date = date;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getAddress() {
