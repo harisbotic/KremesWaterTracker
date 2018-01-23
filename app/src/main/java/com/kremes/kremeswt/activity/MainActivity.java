@@ -16,6 +16,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.kremes.kremeswt.R;
 import com.kremes.kremeswt.database.KremesDatabase;
 import com.kremes.kremeswt.entity.Citizen;
+import com.kremes.kremeswt.entity.Report;
 import com.kremes.kremeswt.utils.BackupUtils;
 import com.nbsp.materialfilepicker.MaterialFilePicker;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         btnImportDb.setOnClickListener(this);
         btnSendSMSToEveryone = findViewById(R.id.btnSendSMSToEveryone);
         btnSendSMSToEveryone.setOnClickListener(this);
+        updateAllUsers();
     }
 
     @Override
@@ -160,28 +162,20 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     }
 
     //DONT UNCOMMENT THIS
-//    private void updateAllUsers() {
-//        new AsyncTask<Void, Void, String>() {
-//            protected String doInBackground(Void... v) {
-//                List<Citizen> citizens =  KremesDatabase.getAppDatabase(MenuStatisticsActivity.this).citizenDao().getAll();
-//                for (Citizen citizen : citizens) {
-//                    List<Report> reports = KremesDatabase.getAppDatabase(MenuStatisticsActivity.this).reportDao().getAllForUsername(citizen.getUsername());
-//                    long total = 0;
-//                    if(reports.size() == 1)
-//                        continue;
-//                    for (Report report : reports) {
-//                        total += report.getWaterAmount();
-//                    }
-//                    reports.get(1).setWaterAmount(total);
-//                    KremesDatabase.getAppDatabase(MenuStatisticsActivity.this).reportDao().update(reports.get(1));
-//
-//                }
-//                return "";
-//            }
-//
-//            protected void onPostExecute(String as) {
-//
-//            }
-//        }.execute();
-//    }
+    private void updateAllUsers() {
+        new AsyncTask<Void, Void, String>() {
+            protected String doInBackground(Void... v) {
+                    List<Report> reports = KremesDatabase.getAppDatabase(MainActivity.this).reportDao().getAllForUsername("sefikkadiric");
+                    long total = 0;
+                    for (Report report : reports) {
+                        System.out.println("On ima:" + report.getWaterAmount());
+                }
+                return "";
+            }
+
+            protected void onPostExecute(String as) {
+
+            }
+        }.execute();
+    }
 }
