@@ -4,6 +4,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Update;
 
 import com.kremes.kremeswt.entity.Report;
 
@@ -29,6 +30,9 @@ public interface ReportDao {
 
     @Insert
     long insert(Report report);
+
+    @Update
+    void update(Report report);
 
     @Insert
     void insertAll(Report... reports);

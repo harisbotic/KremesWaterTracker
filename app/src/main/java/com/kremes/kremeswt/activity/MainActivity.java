@@ -142,24 +142,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         }
     }
 
-    //DONT UNCOMMENT THIS
-//    private void updateAllUsers() {
-//        new AsyncTask<Void, Void, List<Citizen>>() {
-//            protected List<Citizen> doInBackground(Void... v) {
-//                List<Citizen> citizens =  KremesDatabase.getAppDatabase(MainActivity.this).citizenDao().getAll();
-//                System.out.println("size " + citizens.size());
-//                for (Citizen citizen : citizens) {
-//                    updateCitizenStatistic(MainActivity.this, citizen.getUsername());
-//                }
-//                return citizens;
-//            }
-//
-//            protected void onPostExecute(List<Citizen> allCitizens) {
-//
-//            }
-//        }.execute();
-//    }
-
     private void sendSMSToEveryone() {
         new AsyncTask<Void, Void, List<Citizen>>() {
             protected List<Citizen> doInBackground(Void... v) {
@@ -176,4 +158,30 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
             }
         }.execute();
     }
+
+    //DONT UNCOMMENT THIS
+//    private void updateAllUsers() {
+//        new AsyncTask<Void, Void, String>() {
+//            protected String doInBackground(Void... v) {
+//                List<Citizen> citizens =  KremesDatabase.getAppDatabase(MenuStatisticsActivity.this).citizenDao().getAll();
+//                for (Citizen citizen : citizens) {
+//                    List<Report> reports = KremesDatabase.getAppDatabase(MenuStatisticsActivity.this).reportDao().getAllForUsername(citizen.getUsername());
+//                    long total = 0;
+//                    if(reports.size() == 1)
+//                        continue;
+//                    for (Report report : reports) {
+//                        total += report.getWaterAmount();
+//                    }
+//                    reports.get(1).setWaterAmount(total);
+//                    KremesDatabase.getAppDatabase(MenuStatisticsActivity.this).reportDao().update(reports.get(1));
+//
+//                }
+//                return "";
+//            }
+//
+//            protected void onPostExecute(String as) {
+//
+//            }
+//        }.execute();
+//    }
 }

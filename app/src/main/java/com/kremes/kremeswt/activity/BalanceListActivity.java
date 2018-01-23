@@ -52,8 +52,8 @@ public class BalanceListActivity extends AppCompatActivity {
                     else
                         totalInMinus -= citizen.getBalance();
                 }
-                tvTotalInMinus.setText(tvTotalInMinus.getText().toString() + "-" + totalInMinus);
-                tvTotalInPlus.setText(tvTotalInPlus.getText().toString() + "+" + totalInPlus);
+                tvTotalInMinus.setText(tvTotalInMinus.getText().toString() + "-" + totalInMinus+"KM");
+                tvTotalInPlus.setText(tvTotalInPlus.getText().toString() + "+" + totalInPlus+"KM");
             }
         }.execute();
     }

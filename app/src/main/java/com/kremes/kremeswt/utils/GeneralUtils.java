@@ -95,7 +95,7 @@ public class GeneralUtils {
 
     public static void fillGregorianYears(Spinner spinner, Context context) {
         String[] years = new String[200];
-        int startYear = Calendar.getInstance().get(Calendar.YEAR);
+        int startYear = 2017;
         int yearIterator = startYear;
         for (int i=0; i<200; i++) {
             years[i] = String.valueOf(yearIterator++);
@@ -104,7 +104,7 @@ public class GeneralUtils {
                 android.R.layout.simple_spinner_item, years);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
-        spinner.setSelection(dataAdapter.getPosition(String.valueOf(startYear)));
+        spinner.setSelection(dataAdapter.getPosition(String.valueOf(Calendar.getInstance().get(Calendar.YEAR))));
     }
 
     public static String getStringByKey(String key, Context context) {

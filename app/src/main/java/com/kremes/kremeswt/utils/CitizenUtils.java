@@ -90,21 +90,22 @@ public class CitizenUtils {
                     for (Report report: allReports) {
                         Fee fee = getFeeByDateMonth(allFees, report.getDateMonth());
                         if(fee != null) {
-                            totalWaterSpent += report.getWaterAmount();
-                            if(report.getWaterAmount() <= cheapFeeLimit)
-                                newBalance -= (fee.getPrice() * report.getWaterAmount()) + fixedMonthlyCost;
+                            double waterForThisMonth = report.getWaterAmount() - totalWaterSpent;
+                            totalWaterSpent += waterForThisMonth;
+                            if(waterForThisMonth <= cheapFeeLimit)
+                                newBalance -= (fee.getPrice() * waterForThisMonth) + fixedMonthlyCost;
                             else {
-                                double waterSpentForThis = report.getWaterAmount();
+                                double waterSpentForThis = waterForThisMonth;
                                 newBalance -= (fee.getPrice() * cheapFeeLimit);
                                 waterSpentForThis = waterSpentForThis - cheapFeeLimit;
-                                newBalance -= ((fee.getPrice()*3) * waterSpentForThis);
+                                newBalance -= (3 * waterSpentForThis); //(fee.getPrice()*3)
                                 newBalance -= fixedMonthlyCost;
                             }
 
                         }
                     }
 
-                    if(allReports.size() > 0 && totalWaterSpent == 0) {
+                    if(allReports.size() > 0 && totalWaterSpent <= 0) {
                         totalWaterSpent = -1;
                     }
 
