@@ -98,7 +98,7 @@ public class SMSUtils {
         PendingIntent sentIntent = PendingIntent.getBroadcast(context, 0,new Intent("SMS_SENT"), 0);
 
         SmsManager sms = SmsManager.getDefault();
-        //sms.sendTextMessage(phoneNumber, null, message, sentIntent, null);
+        sms.sendTextMessage(phoneNumber, null, message, sentIntent, null);
     }
 
     public static void sendFailSMS(Context context, String phoneNumber, String message)
@@ -106,6 +106,6 @@ public class SMSUtils {
         PendingIntent sentIntent = PendingIntent.getBroadcast(context, 0,new Intent("SMS_SENT"), 0);
 
         SmsManager sms = SmsManager.getDefault();
-        //sms.sendTextMessage(phoneNumber, null, message, sentIntent, null);
+        sms.sendTextMessage(phoneNumber, null, message, sentIntent, null);
     }
 }
