@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.kremes.kremeswt.utils.GeneralUtils.FormatDateMonth;
+import static com.kremes.kremeswt.utils.GeneralUtils.getGregorianMonthName;
+import static com.kremes.kremeswt.utils.GeneralUtils.getMonthNumberFromDateMonth;
 import static com.kremes.kremeswt.utils.ReportUtils.displayNewReportDialog;
 
 public class ReportListActivity extends AppCompatActivity {
@@ -54,14 +56,19 @@ public class ReportListActivity extends AppCompatActivity {
 
             protected void onPostExecute(List<CitizenWithReport> allCitizens) {
                 long totalWaterSpent = 0;
+                long lastMonthWaterSpent = 0;
                 List<CitizenWithReport> newReportList = sortReports(allCitizens);
                 for (CitizenWithReport citizen: newReportList) {
                     long waterSpent = citizen.getWaterAmountLastMonth() > 0? citizen.getWaterAmountLastMonth() : 0;
                     totalWaterSpent += waterSpent > 0? waterSpent : citizen.getWaterAmountLastTwoMonth();
-
+                    if(waterSpent > 0) {
+                        lastMonthWaterSpent += waterSpent - (citizen.getWaterAmountLastTwoMonth() > 0 ? citizen.getWaterAmountLastTwoMonth() : 0);
+                    }
                     reportCardHolder.addView(new ReportCard(ReportListActivity.this, citizen));
                 }
-                tvTotalWaterSpent.setText("Ukupno potrošeno kubika: " + totalWaterSpent);
+                int monthNumber = getMonthNumberFromDateMonth(FormatDateMonth(-1));
+                String lastMonthName = getGregorianMonthName(ReportListActivity.this, monthNumber);
+                tvTotalWaterSpent.setText("Potrošnja za " + lastMonthName + ": " + lastMonthWaterSpent + "m3 (U: " + totalWaterSpent + "m3)");
             }
         }.execute();
     }

@@ -15,7 +15,7 @@
             android:id="@+id/tvTotalWaterSpent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ukupna potrošnja:"
+            android:text="* Potrošnja vode *"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:gravity="center"
