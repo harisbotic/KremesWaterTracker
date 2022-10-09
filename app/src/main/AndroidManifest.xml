@@ -44,6 +44,18 @@
         <activity android:name=".activity.ReportListActivity" />
         <activity android:name=".activity.PaymentListActivity" />
         <activity android:name=".activity.BalanceListActivity"></activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.kremes.kremeswt.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <!-- ressource file to create -->
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths">
+            </meta-data>
+        </provider>
     </application>
 
 </manifest>
