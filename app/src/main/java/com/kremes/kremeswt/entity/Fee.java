@@ -1,9 +1,10 @@
 package com.kremes.kremeswt.entity;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Index;
-import android.arch.persistence.room.PrimaryKey;
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Index;
+import androidx.room.PrimaryKey;
 
 /**
  * Created by Bota
@@ -14,6 +15,7 @@ import android.arch.persistence.room.PrimaryKey;
 )
 public class Fee {
     @PrimaryKey()
+    @NonNull
     @ColumnInfo(name = "date_month")
     private String dateMonth;
 

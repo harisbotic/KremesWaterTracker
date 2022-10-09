@@ -1,7 +1,7 @@
 package com.kremes.kremeswt.utils;
 
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.kremes.kremeswt.database.KremesDatabase;
 import com.kremes.kremeswt.entity.Citizen;

@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/KremesWaterTracker.iml" filepath="$PROJECT_DIR$/KremesWaterTracker.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/KremesWaterTracker.iml" filepath="$PROJECT_DIR$/.idea/modules/KremesWaterTracker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/KremesWaterTracker.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/KremesWaterTracker.app.iml" />
     </modules>
   </component>
 </project>

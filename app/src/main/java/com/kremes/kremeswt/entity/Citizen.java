@@ -1,9 +1,11 @@
 package com.kremes.kremeswt.entity;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.PrimaryKey;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import static com.kremes.kremeswt.utils.CitizenUtils.formatCitizenPhoneNumer;
 import static com.kremes.kremeswt.utils.CitizenUtils.formatUsername;
@@ -17,6 +19,7 @@ import static com.kremes.kremeswt.utils.GeneralUtils.formatCapitalFirstLetter;
 public class Citizen {
 
     @PrimaryKey
+    @NonNull
     @ColumnInfo(name = "username")
     private String username;
 
@@ -33,7 +36,8 @@ public class Citizen {
     private String phoneNumber;
 
     @ColumnInfo(name = "water_meter_number")
-    private long waterMeterNumber;
+    @Nullable
+    private long waterMeterNumber = 0;
 
     @ColumnInfo(name = "water_spent")
     private double waterSpent;

@@ -5,8 +5,8 @@ import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 break;
 
             case R.id.btnBackupDb:
-                BackupUtils.sendBackupToEmail(MainActivity.this);
+                BackupUtils.shareBackupFile(MainActivity.this);
                 break;
 
             case R.id.btnImportDb:

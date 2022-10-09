@@ -1,6 +1,6 @@
 package com.kremes.kremeswt.model;
 
-import android.arch.persistence.room.ColumnInfo;
+import androidx.room.ColumnInfo;
 
 import com.kremes.kremeswt.entity.Citizen;
 

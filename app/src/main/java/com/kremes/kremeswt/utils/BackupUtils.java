@@ -1,6 +1,8 @@
 package com.kremes.kremeswt.utils;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Environment;
 import android.widget.Toast;
 
@@ -41,29 +43,14 @@ public class BackupUtils {
         }
     }
 
-    public static void sendBackupToEmail(final Context context) {
-        BackgroundMail.newBuilder(context)
-                .withUsername("androvana@gmail.com")
-                .withPassword("just2guys")
-                .withMailto("androvana@gmail.com")
-                .withType(BackgroundMail.TYPE_PLAIN)
-                .withSubject("Kremes Backup " + formatCurrentDate())
-                .withBody("Kremes Backup svih podataka napravljen: " + formatCurrentDate())
-                .withAttachments(getDatabaseFilePath(context))
-                .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
-                    @Override
-                    public void onSuccess() {
-                       Toast.makeText(context, "Email uspjesno poslan'", Toast.LENGTH_LONG).show();
-                    }
-                })
-                .withOnFailCallback(new BackgroundMail.OnFailCallback() {
-                    @Override
-                    public void onFail() {
-                        Toast.makeText(context, "Email nije poslan, provjeri internet", Toast.LENGTH_LONG).show();
-                    }
-                })
-                .send();
+    public static void shareBackupFile(final Context context) {
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+        Uri databaseUri = Uri.parse(getDatabaseFilePath(context));
+        sharingIntent.setType("*/*");
+        sharingIntent.putExtra(Intent.EXTRA_STREAM, databaseUri);
+        context.startActivity(Intent.createChooser(sharingIntent, "Share using"));
     }
+
     private static String getDatabaseFilePath(Context context){
         File data = Environment.getDataDirectory();
         String currentDBPath = "/data/" + context.getPackageName() + "/databases/" + DB_NAME;
