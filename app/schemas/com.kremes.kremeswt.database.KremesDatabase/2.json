@@ -1,0 +1,315 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "3bc71be25573d97ec959adee4645aa45",
+    "entities": [
+      {
+        "tableName": "citizen",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`username` TEXT NOT NULL, `first_name` TEXT, `last_name` TEXT, `date_joined` TEXT, `phone_number` TEXT, `water_meter_number` INTEGER NOT NULL, `water_spent` REAL NOT NULL, `balance` REAL NOT NULL, PRIMARY KEY(`username`))",
+        "fields": [
+          {
+            "fieldPath": "username",
+            "columnName": "username",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "firstName",
+            "columnName": "first_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lastName",
+            "columnName": "last_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dateJoined",
+            "columnName": "date_joined",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "phoneNumber",
+            "columnName": "phone_number",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "waterMeterNumber",
+            "columnName": "water_meter_number",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "waterSpent",
+            "columnName": "water_spent",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "balance",
+            "columnName": "balance",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "username"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "report",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `citizen_username` TEXT, `date_month` TEXT, `water_amount` INTEGER NOT NULL, `date_received` INTEGER NOT NULL, FOREIGN KEY(`citizen_username`) REFERENCES `citizen`(`username`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "citizenUsername",
+            "columnName": "citizen_username",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dateMonth",
+            "columnName": "date_month",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "waterAmount",
+            "columnName": "water_amount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateReceived",
+            "columnName": "date_received",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_report_citizen_username",
+            "unique": false,
+            "columnNames": [
+              "citizen_username"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_report_citizen_username` ON `${TABLE_NAME}` (`citizen_username`)"
+          },
+          {
+            "name": "index_report_citizen_username_date_month",
+            "unique": true,
+            "columnNames": [
+              "citizen_username",
+              "date_month"
+            ],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_report_citizen_username_date_month` ON `${TABLE_NAME}` (`citizen_username`, `date_month`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "citizen",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "citizen_username"
+            ],
+            "referencedColumns": [
+              "username"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "fee",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`date_month` TEXT NOT NULL, `price` REAL NOT NULL, PRIMARY KEY(`date_month`))",
+        "fields": [
+          {
+            "fieldPath": "dateMonth",
+            "columnName": "date_month",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "price",
+            "columnName": "price",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "date_month"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_fee_date_month",
+            "unique": true,
+            "columnNames": [
+              "date_month"
+            ],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_fee_date_month` ON `${TABLE_NAME}` (`date_month`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "payment",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `citizen_username` TEXT, `amount` REAL NOT NULL, `date_month` TEXT, `date_paid` INTEGER NOT NULL, FOREIGN KEY(`citizen_username`) REFERENCES `citizen`(`username`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "citizenUsername",
+            "columnName": "citizen_username",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "amount",
+            "columnName": "amount",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateMonth",
+            "columnName": "date_month",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "datePaid",
+            "columnName": "date_paid",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_payment_citizen_username",
+            "unique": false,
+            "columnNames": [
+              "citizen_username"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_payment_citizen_username` ON `${TABLE_NAME}` (`citizen_username`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "citizen",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "citizen_username"
+            ],
+            "referencedColumns": [
+              "username"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "payment_request",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `citizen_username` TEXT, `amount` REAL NOT NULL, `date_requested` TEXT, `date_approved` TEXT, FOREIGN KEY(`citizen_username`) REFERENCES `citizen`(`username`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "citizenUsername",
+            "columnName": "citizen_username",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "amount",
+            "columnName": "amount",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateRequested",
+            "columnName": "date_requested",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dateApproved",
+            "columnName": "date_approved",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_payment_request_citizen_username",
+            "unique": false,
+            "columnNames": [
+              "citizen_username"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_payment_request_citizen_username` ON `${TABLE_NAME}` (`citizen_username`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "citizen",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "citizen_username"
+            ],
+            "referencedColumns": [
+              "username"
+            ]
+          }
+        ]
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3bc71be25573d97ec959adee4645aa45')"
+    ]
+  }
+}

@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         btnImportDb.setOnClickListener(this);
         btnSendSMSToEveryone = findViewById(R.id.btnSendSMSToEveryone);
         btnSendSMSToEveryone.setOnClickListener(this);
-        updateAllUsers();
+//        updateAllUsers();
     }
 
     @Override
@@ -162,20 +162,20 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     }
 
     //DONT UNCOMMENT THIS
-    private void updateAllUsers() {
-        new AsyncTask<Void, Void, String>() {
-            protected String doInBackground(Void... v) {
-                    List<Report> reports = KremesDatabase.getAppDatabase(MainActivity.this).reportDao().getAllForUsername("sefikkadiric");
-                    long total = 0;
-                    for (Report report : reports) {
-                        System.out.println("On ima:" + report.getWaterAmount());
-                }
-                return "";
-            }
-
-            protected void onPostExecute(String as) {
-
-            }
-        }.execute();
-    }
+//    private void updateAllUsers() {
+//        new AsyncTask<Void, Void, String>() {
+//            protected String doInBackground(Void... v) {
+//                    List<Report> reports = KremesDatabase.getAppDatabase(MainActivity.this).reportDao().getAllForUsername("sefikkadiric");
+//                    long total = 0;
+//                    for (Report report : reports) {
+//                        System.out.println("On ima:" + report.getWaterAmount());
+//                }
+//                return "";
+//            }
+//
+//            protected void onPostExecute(String as) {
+//
+//            }
+//        }.execute();
+//    }
 }

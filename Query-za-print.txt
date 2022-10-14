@@ -1,0 +1,1 @@
+SELECT first_name as Ime, last_name as Prezime, phone_number as Telefon, water_meter_number as Brojac, water_spent as "Ukupno potrošeno vode", balance as "Stanje računa" FROM 'citizen'

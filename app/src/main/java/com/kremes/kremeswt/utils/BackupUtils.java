@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 import com.kremes.kremeswt.BuildConfig;
+import com.kremes.kremeswt.activity.MainActivity;
+import com.kremes.kremeswt.database.KremesDatabase;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,7 +35,7 @@ public class BackupUtils {
     public static void importBackup(Context context, String filepath) throws IOException  {
         InputStream in = new FileInputStream(filepath);
         try {
-            OutputStream out = new FileOutputStream(getDatabaseFilePath(context));
+            OutputStream out = new FileOutputStream(getDatabaseFile(context));
             try {
                 // Transfer bytes from in to out
                 byte[] buf = new byte[1024];
@@ -62,11 +64,10 @@ public class BackupUtils {
         context.startActivity(Intent.createChooser(emailIntent, "Izaberi Email providera"));
     }
 
-    private static String getDatabaseFilePath(Context context){
+    public static String getDatabaseFile(Context context) {
         File data = Environment.getDataDirectory();
         String currentDBPath = "/data/" + context.getPackageName() + "/databases/" + DB_NAME;
-        File currentDB = new File(data, currentDBPath);
-        return currentDB.getAbsolutePath();
+        return new File(data, currentDBPath).getAbsolutePath();
     }
 
     private static Uri getDatabaseFileUri(Context context){

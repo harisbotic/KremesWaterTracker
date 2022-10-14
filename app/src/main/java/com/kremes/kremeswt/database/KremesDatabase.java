@@ -15,6 +15,7 @@ import com.kremes.kremeswt.entity.Fee;
 import com.kremes.kremeswt.entity.Payment;
 import com.kremes.kremeswt.entity.PaymentRequest;
 import com.kremes.kremeswt.entity.Report;
+import com.kremes.kremeswt.utils.BackupUtils;
 
 /**
  * Created by Bota
@@ -39,6 +40,7 @@ public abstract class KremesDatabase extends RoomDatabase {
                             // allow queries on the main thread.
                             // Don't do this on a real app! See PersistenceBasicSample for an example.
                             .allowMainThreadQueries()
+                            .setJournalMode(JournalMode.TRUNCATE)
                             .build();
         }
         return INSTANCE;
