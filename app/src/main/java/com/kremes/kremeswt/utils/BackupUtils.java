@@ -7,7 +7,6 @@ import android.os.Environment;
 import android.os.StrictMode;
 import android.widget.Toast;
 
-import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 import com.kremes.kremeswt.BuildConfig;
 import com.kremes.kremeswt.activity.MainActivity;
 import com.kremes.kremeswt.database.KremesDatabase;

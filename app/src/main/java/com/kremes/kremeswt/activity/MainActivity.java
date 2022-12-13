@@ -7,6 +7,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -23,6 +25,7 @@ import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static com.kremes.kremeswt.utils.BackupUtils.importBackup;
 import static com.kremes.kremeswt.utils.PaymentUtils.displayNewPaymentDialog;
@@ -115,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         new MaterialFilePicker()
                 .withActivity(this)
                 .withRequestCode(159)
-                .withRootPath("/storage/emulated/0/") //Pre 4.4 /storage/sdcard0/ -- /storage/emulated/0/
+                .withRootPath(Environment.getExternalStorageDirectory().getPath()) //Pre 4.4 /storage/sdcard0/ -- /storage/emulated/0/
                 .start();
     }
 
